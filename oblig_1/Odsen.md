@@ -15,7 +15,15 @@ For å få en utfordring godkjent kan man enten velge om man stoler på hverandr
 Alternativt kan man ha en intern validering. Da kan man for eksempel tar bilde av at man har fullført en utfordring, eller en annen kan være med og se på utfordringen bli fullført. For eksempel å skrive noe med tusj i ansiktet og gå på butikken kan man ta bilde av, mens å løpe naken over en bruk kan man få noen med på å se på.
 
 ## Design
+![Oversikt over når man lager et rom](bilder/odsen_create_room.png)
 
+Oversikt over å lage et rom. En oversikt over hvem som er med, når man vinner og oppretting av utfordringer.
+
+![Oversikt over hvordan et rom kan se ut](bilder/odsen_ongoing_room.png)
+
+En oversikt over hvem som leder i rommet, avhengig av hvordan man velger å vurdere hvem som leder. I tillegg er det en oversikt over hvilke utfordringer som er igjen, sammen med en vanskelighetsgrad, og en oversikt over hva som har blitt gjennomført mest nylig. 
+
+I tillegg blir det en fancy fancy bakgrunn, og andre designdetaljer.
 
 ## Pros n cons
 
