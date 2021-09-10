@@ -5,7 +5,15 @@ En app som kobles opp med mot databaser med GPS koordinater og koordinater fra m
 
 Dette er for å kunne varlse brukere når de er i nærheten av noe de selv har sagt at de er interessert i, for eksempel fluesopp og rådyr.
 
+I tillegg appen eventuelt ha en oversikt over hva man har sett, og hva som kan være tilsvarende.
+
 ## Design
+![Kart over Dvergsnestangen, med prikker for å markere steder med observasjoner](bilder/wildlife_kart.png)
+
+Et kart med oversikt over steder der ting har blitt observert. For eksempel kan gulmed rosa markere seler, rød med rosa kan være sopp av diverse slag og orange med hvit kan være kaniner.
+
+I tillegg har man tilgang til en meny til høyre der man kan filtrere hva som vises på kartet. I tillegg kan man derfra kunne søke opp en ting for å derfra kunne finne et sted man vil reise.
+
 
 ## Pros n cons
 
