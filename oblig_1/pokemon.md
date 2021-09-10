@@ -9,3 +9,14 @@ Hovedforskjellen mellom boka og appen er at appen kan ha en "damage calculator" 
 
 ## Design
 ![Wireframe for damage calc](bilder/pokemon_damage_calc.png)
+
+![Wireframe for en rute](bilder/pokemon_route.png)
+
+Boksene i bildene er for å vise at det er forskjellige seksjoner, de er ikke tenkt for å være med i designet. I tillegg er tanken at det skal være en bakrgrunn tilpasset innholdet. For ruten kan det være et kart over selve ruten, for å gjøre det mulig å navigere seg gjennom (for eksempel i mørke grotter, som Dark Cave eller Victory League).
+
+## Pros n cons
+### Pros
+Pokemon er gøy, og jeg kommer derfor til å syns det er mer gøy  holde på med under utvikling. I tillegg er dette noe jeg har savnet mens jeg har spilt i min oppvekst.
+
+### Cons
+Er ikke alt for mye spesielt android spesefikt man kan dra inn. Blir i hovedsak are et enkelt program man plotter inn data i underveis.
