@@ -25,6 +25,8 @@ Det er krav som må være på plass for at appen i det hele tatt skal fungere. U
   * Gi tilgang til andre brukere til rommet
 * Vise utfordringer som er i et rom man er med i selv
 * Registrere en utfordring som fullført
+* Se hvem andre som er med i et rom
+* Se hvem som har fullført en utfordring
 
 ### Bør
 Her er krevene som ikke er viktige for kjernefunksjonaliteten, men som tilbyr funksjonalitet likevell.
@@ -34,7 +36,7 @@ Her er krevene som ikke er viktige for kjernefunksjonaliteten, men som tilbyr fu
 * Kunne bytte mellom flere rom
 * Avslutte et rom når man er ferdige
   * Se et rom som er avsluttet, både resultater og utfordringer
-* Se hvem som har fullført en utfordring
+* Logge inn
 
 ### Kan
 Kravene som er i denne kategorien er krav som ikke kommer til å bli prioritert i første omgang. Dette er fordi de ikke gir noen stor nytteverdi til appen.
@@ -43,23 +45,42 @@ Kravene som er i denne kategorien er krav som ikke kommer til å bli prioritert 
 * Verifisering av utfordringer
   * Laste opp bilder / filer for å dokumentere egne
   * Se andres bilder / filer for å godkjenne utfordring
+* Logge inn på flere ulike enheter
+* Legge til venner med QR kode
   
 
 ### Ikke-funksjonelle krav
 I tillegg er det enkelte krav som ikke har noe med selve appen å gjøre. Disse kravene er viktige for at appen skal fungere, selv om de ikke er like direkte knyttet til appen som de andre kravene.
-* Server til database
-
+* Server med database
 
 ## Design
-![Oversikt over når man lager et rom](bilder/odsen_create_room.png)
+I utgangspunktet er appen tenkt å være i portrett modus. Grunnen til dette er at appen er tenkt til å brukes i korte intervaller. I tillegg bruker de fleste mobilen stående, så det blir derfor designet for flest mulig. Bildene som kommer under er tenkt til den "ferdige" applikasjonen, som støtter alle kravene.
 
-Oversikt over å lage et rom. En oversikt over hvem som er med, når man vinner og oppretting av utfordringer.
+Dette er forsiden man kommer til, dersom man er logget inn. Her får man vite hvem man er logget inn som, og 4 ulikebokser man bruker til å gå videre. I tillegg er det en mulighet til å logge av fra enheten.
 
-![Oversikt over hvordan et rom kan se ut](bilder/odsen_ongoing_room.png)
+Siden brukere må innom denne siden hver gang man skal inn på en av de andre sidene vil også dette fungere som en meny. Etter at man har gått inn på en av sidene kan man da komme tilbake hit ved tilbakeknappen man har på enheten sin.
 
-En oversikt over hvem som leder i rommet, avhengig av hvordan man velger å vurdere hvem som leder. I tillegg er det en oversikt over hvilke utfordringer som er igjen, sammen med en vanskelighetsgrad, og en oversikt over hva som har blitt gjennomført mest nylig. 
+![Forside med 4 bokser for å gå videre](bilder/forside.png)
 
-I tillegg blir det en fancy fancy bakgrunn, og andre designdetaljer.
+Kommer hit etter å ha valgt et rom fra forsiden. Navnet på rommet kommer øverst, og så antallet i rommet. Antallet kan man klikke på for å se en liste med navnene. Deretter kommer en liste med de som leder i et rom, sammen med antall utfordringer vedkommende har fullført. Til slutt er det en liste over gjennværende utfordringer.
+
+![Oversiktside i et rom, med leaderboard og andre utfordringer](bilder/startet_rom.png)
+
+Siden har øverst en mulighet for å legge til andre brukere som venner, via brukernavn. I tillegg kommer en QR kode som kan brukes av noen andre for å kunne legge deg til som venn. Nederst er det en liste over alle vennene du har i appen.
+
+I tillegg er det en linje der det står at man har fått venneforespørsler, dersom man har fått det. Da får man opp en oversikt over alle forespørsler man ikke har bekreftet/avvist i kronologisk rekkefølge.
+
+![Administrasjonsside for venner](bilder/venner.png)
+
+Via denne skjermen kan man opprette nye rom. Fra øverst til nederst starter man med å velge navn på rommet. Deretter velger man hvem som skal være med i rommet, enten via søk eller via å krysse av fra en liste med de man spiller mest med. Etter det velger man når rommet avsluttes, markert med grønn boks. Man må i tillegg oppdatere "X" til enten et tall eller en dato.
+
+Man må også legge til utfordringer til rommet, og sette en vanskelighetsgrad på dem. Brukeren legger da inn en tekst til å beskrive utfordringen, og velger mellom "Lett", "Middels" og "Vanskelig". Vanskelighetsgraden på utfordringer i en gruppe vil justere seg innad i gruppen etterhvert som deltakerne merker hva de synes er lett og vanskelig. Når man er ferdig har man en knapp til det nederst.
+
+![Skjermen man kommer til når man skal opprette et nytt rom](bilder/lag_nytt_rom.png)
+
+For alle tidligere fullførte rom er tanken at man skal kunne se hvor bra eller dårlig man har gjort det sammenlignet med de andre i rommet. Derfor har man en samleside for alle tidligere rom, der man kan scrolle gjennom en liste der navnet på rommet og din rangering står. Derfra kan man velge et for å se hvem som har gjort hvilke utfordringer, og den samlede resultatlista.
+
+![Liste der man kan gå inn på tidligere fullførte rom](bilder/ferdige_rom.png)
 
 ## Pros n cons
 
