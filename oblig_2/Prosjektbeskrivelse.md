@@ -47,6 +47,8 @@ Kravene som er i denne kategorien er krav som ikke kommer til å bli prioritert 
   * Se andres bilder / filer for å godkjenne utfordring
 * Logge inn på flere ulike enheter
 * Legge til venner med QR kode
+* Få varsel når noen fullfører en utfordring
+* Få varsel når et rom avsluttes
   
 
 ### Ikke-funksjonelle krav
@@ -82,10 +84,16 @@ For alle tidligere fullførte rom er tanken at man skal kunne se hvor bra eller 
 
 ![Liste der man kan gå inn på tidligere fullførte rom](bilder/ferdige_rom.png)
 
-## Pros n cons
+## Systemdesign
 
-### Pros
-Kan ta inn en del "android" ting, som push varsler for når noen fullfører en utfordring og Bluetooth for å finne andre i nærheten når man lager rom. I tillegg er det ikke programmatisk vanskelig, altså at det ikke er vanskelige algoritmer eller vanskelig matte.
+### Service og fragment
+Tanken med appen er at den skal brukes aktivt i kortere perioder. Derfor vil det meste av appen ikke trenger å kjøre i bakgrunnen når appen lukkes. I tillegg er appen frittstående, som igjen gjør at den ikke trenger å kommunisere med andre apper. Derfor vil det for det meste av appen kun være en Activety.
 
-### Cons
-Kan bli litt for grunnleggende. Blir fort vekk bare å lytte etter oppdateringer fra en database/server, og så håndtere det i appen. I tillegg må man da ha en server, eller sette opp en virituell lokalt når man skal kjøre appen. Den må da i tilfellet settes opp og tyres med, selv om det ikke har alt for mye med apputvikling å gjøre.
+Appen skal kunne gi varsler for når andre har fullført en utfordring og når rom avsluttes. Derfor må appen ha en kobling mo backend når appen er lukket for å sjekke etter varsler brukeren skal få. Til dette trengs det en Service. Alternativt kunne man brukt et Fragment, men Service vil kunne overleve bedre som en bakgrunnsprosess.
+
+### Lagring av data
+Appen vil inneholde både data om rom og om brukeren. Det meste av dataen skal i tillegg deles med andre brukere, som nødvendigvis ikke er i nærheten. Derfor vil man måtte ha data eksternt. <span style="color:red; font-size:50px">Ikke ferdig, firebase vs raspberry pi?</span>
+
+### Brukerhåndtering
+Siden en bruker skal kunne bruke appen på flere enheter som samme bruker, vil man måtte ha brukerhåndtering. I tillegg til at det er flere brukere som konkurerer mot hverandre i et rom vil det også være nødvendig med brukerhåndtering for å kunne skille de ulike brukerne fra hverandre.
+
