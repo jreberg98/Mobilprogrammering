@@ -92,8 +92,30 @@ Tanken med appen er at den skal brukes aktivt i kortere perioder. Derfor vil det
 Appen skal kunne gi varsler for når andre har fullført en utfordring og når rom avsluttes. Derfor må appen ha en kobling mo backend når appen er lukket for å sjekke etter varsler brukeren skal få. Til dette trengs det en Service. Alternativt kunne man brukt et Fragment, men Service vil kunne overleve bedre som en bakgrunnsprosess.
 
 ### Lagring av data
-Appen vil inneholde både data om rom og om brukeren. Det meste av dataen skal i tillegg deles med andre brukere, som nødvendigvis ikke er i nærheten. Derfor vil man måtte ha data eksternt. <span style="color:red; font-size:50px">Ikke ferdig, firebase vs raspberry pi?</span>
+Appen vil inneholde både data om rom og om brukeren. Det meste av dataen skal i tillegg deles med andre brukere, som nødvendigvis ikke er i nærheten. Derfor vil man måtte ha data eksternt. Til dette tenker jeg å bruke firebase, ettersom det ser ganske greit ut å koble sammen. I tillegg vil firebase også kunne brukes til brukerhåndtering.
 
 ### Brukerhåndtering
 Siden en bruker skal kunne bruke appen på flere enheter som samme bruker, vil man måtte ha brukerhåndtering. I tillegg til at det er flere brukere som konkurerer mot hverandre i et rom vil det også være nødvendig med brukerhåndtering for å kunne skille de ulike brukerne fra hverandre.
 
+## Hovedkomponenter
+Hvert skjermbilde vil være en egen komponent, med tillhørende funksjonalitet. Det vil si at det er behov for 5 skjermer i appen. I tillegg må brukeren være logget inn for å bruke appen, som vil si at det første gangen man åpner appen må være en innloggingsside. Innloggingen må i tillegg komme opp hver gang en bruker logger ut, så brukeren kan logge inn som en annen bruker.
+
+Utenom brukerhåndtering bør alle krav kunne dekkes av de andre skjermene. Appen blir da forholdsvis liten ettersom det bare er 4 skjermer å legge innhold på, siden den første skjermen i praksis bare er til navigasjon.
+
+## Resurser
+### Bilder
+Selve appen trenger ikke bilder, ettersom det bare er tekstelig innhold. Eneste stedet det kunne vært naturlig å ha bilder er som bakgrunn på det forskjellige skjermene, og at det eventuelt går å laste opp et eget bilde til hvert rom. Utenfor appen bør det være et bilde til logo for appen. Det er ikke viktig for funksjonaliteten, men gir et bedre inntrykk av appen.
+
+### Lyd
+Lyd vil heller ikke ha noen spesiell nytte i appen. Eventuelt kunne man hatt en lyd for å "feire" at man har fullført en utfordring. Derimot vil det være naturlig med en lyd for å varsle en bruker om at noen har fullført en utfordring mens man er ute av appen. Altså en lyd som kommer sammen med push varselet man får.
+
+### Klasser
+Hver skjerm trenger en klasse til å ha funksjonaliteten som trengs. I tillegg er hvert rom en klasse som holder på data om rommet. I tillegg bør utfordringer være en egen klasse, siden de også har flere data.
+
+Det kan også være aktuelt med en egen klasse for å kommunisere med database. Siden de ulike skjermene gjør forskjellige ting vil det være lite overlapping i hva de gjør. Derfor kan man også plassere database kommunikasjon i klassene til de aktuelle skjermene.
+
+### Eksternt
+Det eneste appen trenger som er eksternt er database og brukerhåndtering. Ettersom appen ikke bruker annet eksternt vil appen trenge lite nettverk, som også kan være begrensende på for eksempel mobiler.
+
+## Utfordringer
+De største utfrodringene for appen ser jeg for meg er brukerhåndtering og å koble appen mot databasen. Utenom ser jeg for meg at det kommer til å ta tid å justere alt innholdet på skjermene for å få alt til å ryddig ut. Utover det så bør det meste gå greit nok.
