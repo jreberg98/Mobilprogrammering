@@ -9,4 +9,12 @@
     <string name="MAIN_create_rom">Lag et nytt rom å spille i</string>
     <string name="MAIN_closed_rooms">Finn et tidligere avsluttet rom</string>
 
+    <!--  Alle tekstverdier til Create Room  -->
+    <string name="CREATE_hint_name_of_room">Navn på rommet</string>
+    <string name="CREATE_add_frineds">Legg til venner</string>
+    <string name="CREATE_friend_list_placeholder">Venner du legger til kommer her</string>
+    <string name="CREATE_win_condition_challenges">Første til et antall utfordringer</string>
+    <string name="CREATE_win_condition_time">Den som leder etter tid</string>
+    <string name="CREATE_add_challenge_placeholder"><b>Legg til utfordringer her</b></string>
+
 </resources>
