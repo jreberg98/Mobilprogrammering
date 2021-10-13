@@ -6,13 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextView
+        android:id="@+id/MAIN_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="84dp"
+        android:text="@string/MAIN_welcome"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/MAIN_logged_inn_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/MAIN_logged_inn_as"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MAIN_heading" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/MAIN_divider_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/MAIN_divider_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/MAIN_open_rooms"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="@string/MAIN_go_to_open_room"
+        app:layout_constraintEnd_toStartOf="@+id/MAIN_divider_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/MAIN_divider_horizontal" />
+
+    <Button
+        android:id="@+id/MAIN_find_friends"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="@string/MAIN_find_friends"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/MAIN_divider_vertical"
+        app:layout_constraintTop_toTopOf="@+id/MAIN_divider_horizontal" />
+
+    <Button
+        android:id="@+id/MAIN_create_room"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="@string/MAIN_create_rom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/MAIN_divider_vertical"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/MAIN_finished_rooms"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="@string/MAIN_closed_rooms"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/MAIN_divider_vertical" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

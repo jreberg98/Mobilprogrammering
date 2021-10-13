@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Odsen</string>
+
+    <!--  Alle tekstverdier til Main / hoved siden  -->
+    <string name="MAIN_welcome">Velkommen til Odsen</string>
+    <string name="MAIN_logged_inn_as">Du er logget inn som %s</string>
+    <string name="MAIN_go_to_open_room">Gå til et åpent rom du er med i</string>
+    <string name="MAIN_find_friends">Finn flere venner å konkurere med</string>
+    <string name="MAIN_create_rom">Lag et nytt rom å spille i</string>
+    <string name="MAIN_closed_rooms">Finn et tidligere avsluttet rom</string>
+
 </resources>
