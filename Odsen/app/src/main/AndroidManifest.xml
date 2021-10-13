@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Odsen">
         <activity
+            android:name=".OpenRooms"
+            android:exported="true" />
+        <activity
+            android:name=".FindFriends"
+            android:exported="true" />
+        <activity
+            android:name=".FinishedRooms"
+            android:exported="true" />
+        <activity
+            android:name=".CreateRoom"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
