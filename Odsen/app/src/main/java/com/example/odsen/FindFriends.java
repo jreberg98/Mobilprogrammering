@@ -18,11 +18,19 @@ import java.util.ArrayList;
 
 public class FindFriends extends AppCompatActivity {
 
+    // Views
     private EditText usernameInput;
     private ImageView qrCodePlaceholder;
     private Button qrCodeInput;
     private TextView infoNewFriendRequests;
     private LinearLayout friendList;
+    private LinearLayout friendRequest;
+    private TextView infoSendFriendRequest;
+
+    // Data
+    // TODO: oppdatere begge listene fra DB
+    private ArrayList<String> incomingFriendRequests;
+    private ArrayList<String> outFriendRequests = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,8 @@ public class FindFriends extends AppCompatActivity {
         qrCodeInput = findViewById(R.id.FRIENDS_add_with_qr_code);
         infoNewFriendRequests = findViewById(R.id.FRIENDS_new_friend_requests);
         friendList = findViewById(R.id.FRIENDS_friends_list);
+        friendRequest = findViewById(R.id.FRIENDS_friend_request_list);
+        infoSendFriendRequest = findViewById(R.id.FRIENDS_sent_friend_requests_text);
 
 
         // Sjekker etter nye venner
@@ -61,6 +71,21 @@ public class FindFriends extends AppCompatActivity {
 
                 String username = textView.getText().toString();
 
+
+                outFriendRequests.add(username);
+
+                TextView tempRequest = new TextView(friendRequest.getContext());
+
+                tempRequest.setText(username);
+                tempRequest.setId(outFriendRequests.size());
+                tempRequest.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tempRequest.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+
+                friendRequest.addView(tempRequest);
+
+                checkTitle();
+
+                Log.i("FRIENDS", "Sendt friendrequest to " + username);
                 // TODO: Sende venneforespørsel til DB
 
                 return true;
@@ -87,6 +112,11 @@ public class FindFriends extends AppCompatActivity {
         }
         Log.i("FRIENDS", "Ingen venner :(");
         return null;
+    }
 
+    private void checkTitle() {
+        if (!outFriendRequests.isEmpty()) {
+            infoSendFriendRequest.setText("Sendte forespørsler");
+        }
     }
 }
