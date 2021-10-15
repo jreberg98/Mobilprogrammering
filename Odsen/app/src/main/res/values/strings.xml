@@ -23,6 +23,14 @@
     <string name="FRIENDS_add_friends_username_hint">Legg til venner via brukernavn</string>
     <string name="FRIENDS_add_friends_QR_code">Legg til venner via QR kode</string>
     <string name="FRIENDS_new_friend_requests">Du nye venneforespørsler</string>
-    <string name="FRIENDS_"></string>
+
+
+    <!--  Alle tekstverdier for liste åpne rom  -->
+    <string name="OPEN_ROOMS_title"><big>Du er med i %d rom</big></string>
+    <string name="OPEN_ROOMS_title_no_rooms"><big>Du er ikke med i noen rom end</big></string>
+    <string name="OPEN_ROOMS_filter_after_number_of_members">Antall deltakere</string>
+    <string name="OPEN_ROOMS_filter_after_user">Bruker du \nvil ha med</string>
+    <string name="OPEN_ROOMS_filter_after_challenges">Gjennværende \nutfordringer</string>
+
 
 </resources>

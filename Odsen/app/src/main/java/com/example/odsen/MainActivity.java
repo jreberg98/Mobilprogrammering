@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         MAIN_open_rooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openRoomsIntent = new Intent(view.getContext(), OpenRooms.class);
+                Intent openRoomsIntent = new Intent(view.getContext(), OpenRoomsList.class);
 
                 Log.i(NAVIGATION, "Going to 'OpenRooms'");
 
