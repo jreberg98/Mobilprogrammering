@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Odsen">
         <activity
+            android:name=".ActiveRoom"
+            android:exported="true" />
+        <activity
             android:name=".OpenRoomsList"
             android:exported="true" />
         <activity
