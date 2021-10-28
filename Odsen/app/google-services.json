@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "816314859489",
+    "project_id": "odsen-319e5",
+    "storage_bucket": "odsen-319e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816314859489:android:ad23ff05c0d3074069dca0",
+        "android_client_info": {
+          "package_name": "com.example.odsen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816314859489-mnmapaf36fpq2h4ktfm5rv7sagk4lpg2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.odsen",
+            "certificate_hash": "b4c264e0da064e90a5ecf20e7eba328805451789"
+          }
+        },
+        {
+          "client_id": "816314859489-fqd8v0nstk91vkbvaugl35nkusd2o170.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLOaW1QQBfqvmd7cf4zdSGGwmR9tTDECk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816314859489-fqd8v0nstk91vkbvaugl35nkusd2o170.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
