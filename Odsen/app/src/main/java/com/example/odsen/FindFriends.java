@@ -85,7 +85,7 @@ public class FindFriends extends AppCompatActivity {
 
                 checkTitle();
 
-                Log.i("FRIENDS", "Sendt friendrequest to " + username);
+                Log.d(LogTags.ANY_INPUT, "FindFriends: Sendt vennefroespørsel til " + username);
                 // TODO: Sende venneforespørsel til DB
 
                 return true;
@@ -110,7 +110,7 @@ public class FindFriends extends AppCompatActivity {
             temp.add("fisk");
             return temp;
         }
-        Log.i("FRIENDS", "Ingen venner :(");
+        Log.i(LogTags.LOADING_DATA, "FindFriends: Laster inn venner");
         return null;
     }
 

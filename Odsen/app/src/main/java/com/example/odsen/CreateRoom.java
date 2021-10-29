@@ -70,6 +70,8 @@ public class CreateRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Log.i(LogTags.ANY_INPUT, "CreateRoom: submitknapp trykket");
+
                 // TODO: Input validering på andre felt på skjermen
 
                 createRoom();
@@ -126,7 +128,7 @@ public class CreateRoom extends AppCompatActivity {
     // Sjekker verdien på radioknapp, og oppdaterer variablene
     private void radioButtonClick(View view) {
         boolean checked = ((RadioButton) view).isChecked();
-        Log.d("TAG", "radioButtonClick: ");
+        Log.d(LogTags.ANY_INPUT, "radioButtonClick: ");
         switch (view.getId()) {
             case R.id.CREATE_radio_challenges:
                 if (checked)
@@ -137,9 +139,9 @@ public class CreateRoom extends AppCompatActivity {
                     winAfterTime = true;
                     break;
             default:
-                Log.d("CREATE ROOM", "Unexpected value on radio button, create rom");
+                Log.e(LogTags.ILLEGAL_INPUT, "CreateRoom: Radio input får feil verdi");
         }
-        Log.d("T", String.valueOf(winAfterTime));
+        Log.v(LogTags.ANY_INPUT, "CreateRoom: win condition = " + String.valueOf(winAfterTime));
     }
 
     // Lager rommet, og sender til DB

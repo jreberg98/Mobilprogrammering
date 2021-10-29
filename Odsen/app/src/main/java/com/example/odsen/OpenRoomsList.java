@@ -73,7 +73,7 @@ public class OpenRoomsList extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent intent = intentToRoom(view);
 
-                        Log.i("NAVIGATING", "Going to 'ActiveRoom': " + room.getName());
+                        Log.i(LogTags.NAVIGATION, "Open rooms: Går til " + room.getName());
                         startActivity(intent);
                     }
                 });
@@ -91,7 +91,7 @@ public class OpenRoomsList extends AppCompatActivity {
 
         intent.putExtra(ROOM_KEY, textView.getText());
 
-        Log.i("OPEN_ROOM", "Intent til " + textView.getText());
+        Log.i(LogTags.NAVIGATION, "OpenRooms: Lager intent til " + textView.getText());
 
         return intent;
     }
