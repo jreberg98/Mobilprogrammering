@@ -18,6 +18,9 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Button MAIN_find_friends;
     private Button MAIN_create_room;
     private Button MAIN_finished_rooms;
+    private Button MAIN_logg_out;
     private TextView loggedInn;
 
     private FirebaseAuth firebaseAuth;
@@ -88,6 +92,23 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(NAVIGATION, "Going to 'FinishedRooms'");
 
                 startActivity(finishedRoomsIntent);
+            }
+        });
+
+        MAIN_logg_out = findViewById(R.id.MAIN_logg_out);
+        MAIN_logg_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AuthUI.getInstance().signOut(getApplicationContext())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                Log.i(LogTags.USER_LOGGING, "Bruker logget ut");
+                                // Avslutter appen
+
+                            }
+                        });
             }
         });
 
@@ -176,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
             loggedInn.setText("VIRKER IKKE");
             Log.e(LogTags.USER_LOGGING, "Innlogging feilet");
             this.finishAffinity();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
 
         }
     }

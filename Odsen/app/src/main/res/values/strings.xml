@@ -8,6 +8,7 @@
     <string name="MAIN_find_friends">Finn flere venner å konkurere med</string>
     <string name="MAIN_create_rom">Lag et nytt rom å spille i</string>
     <string name="MAIN_closed_rooms">Finn et tidligere avsluttet rom</string>
+    <string name="MAIN_logg_out">Logg ut</string>
 
     <!--  Alle tekstverdier til Create Room  -->
     <string name="CREATE_hint_name_of_room">Navn på rommet</string>
