@@ -13,8 +13,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateRoom extends AppCompatActivity {
 
@@ -37,10 +45,24 @@ public class CreateRoom extends AppCompatActivity {
     private LinearLayout friendHolder;
     private LinearLayout challengeHolder;
 
+    // Eksterne vektøy
+    private FirebaseFirestore storage;
+    private CollectionReference testCollection;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_room);
+
+        storage = FirebaseFirestore.getInstance();
+        testCollection = storage.collection("test");
+
+        HashMap map = new HashMap();
+
+        map.put("key", "value");
+
+        testCollection.add(map);
+
 
         name = findViewById(R.id.CREATE_name_of_room);
         addFriends = findViewById(R.id.CREATE_add_friends);
@@ -122,7 +144,6 @@ public class CreateRoom extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
     // Sjekker verdien på radioknapp, og oppdaterer variablene

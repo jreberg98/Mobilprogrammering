@@ -45,4 +45,11 @@ dependencies {
 
     // Firebase auth
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+
+    // Firestuff
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-database'
+
+    implementation 'com.google.firebase:firebase-firestore:22.1.2'
+
 }
