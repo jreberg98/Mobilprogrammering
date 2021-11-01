@@ -53,7 +53,7 @@ public class CreateRoom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_room);
-
+/*
         storage = FirebaseFirestore.getInstance();
         testCollection = storage.collection("test");
 
@@ -62,7 +62,11 @@ public class CreateRoom extends AppCompatActivity {
         map.put("key", "value");
 
         testCollection.add(map);
+*/
 
+        IDB db = new DBFirebase("test");
+
+        db.createRoom(null);
 
         name = findViewById(R.id.CREATE_name_of_room);
         addFriends = findViewById(R.id.CREATE_add_friends);
