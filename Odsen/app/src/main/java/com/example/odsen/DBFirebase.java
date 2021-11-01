@@ -1,5 +1,7 @@
 package com.example.odsen;
 
+import android.util.Log;
+
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -14,6 +16,8 @@ public class DBFirebase implements IDB{
     public DBFirebase(String collection) {
         storage = FirebaseFirestore.getInstance();
         this.collection = storage.collection(collection);
+
+        Log.i(LogTags.STARTING_DB, "Instans av Firebase DB, collection " + this.collection.getId());
     }
 
 
@@ -23,6 +27,6 @@ public class DBFirebase implements IDB{
 
         map.put("key", "value");
 
-        collection.add(map);
+        collection.add(room);
     }
 }

@@ -6,6 +6,9 @@ public class LogTags {
     // Ukategorisert
     public static final String NAVIGATION = "Navigering";
 
+    // Database
+    public static final String STARTING_DB = "Instans av DB";
+
     // Lasting av data
     public static final String USER_LOGGING = "Innlogging";
     public static final String LOADING_DATA = "Laster inn data";

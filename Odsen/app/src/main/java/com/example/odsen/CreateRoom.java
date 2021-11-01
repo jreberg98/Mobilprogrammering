@@ -46,27 +46,15 @@ public class CreateRoom extends AppCompatActivity {
     private LinearLayout challengeHolder;
 
     // Eksterne vektøy
-    private FirebaseFirestore storage;
-    private CollectionReference testCollection;
+    private IDB db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_room);
-/*
-        storage = FirebaseFirestore.getInstance();
-        testCollection = storage.collection("test");
 
-        HashMap map = new HashMap();
-
-        map.put("key", "value");
-
-        testCollection.add(map);
-*/
-
-        IDB db = new DBFirebase("test");
-
-        db.createRoom(null);
+        db = new DBFirebase("test");
 
         name = findViewById(R.id.CREATE_name_of_room);
         addFriends = findViewById(R.id.CREATE_add_friends);
@@ -108,6 +96,11 @@ public class CreateRoom extends AppCompatActivity {
         addFriends.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                // Triges når teksten fjernes
+                if (textView.getText().toString().equals("")){
+                    return false;
+                }
+
                 // TODO: Input validering, sjekke om vennen finnes
 
                 String friend = textView.getText().toString();
@@ -124,6 +117,8 @@ public class CreateRoom extends AppCompatActivity {
 
                 friendHolder.addView(tempFriend);
 
+                addFriends.getText().clear();
+
                 return true;
 
             }
@@ -133,6 +128,11 @@ public class CreateRoom extends AppCompatActivity {
         addChallenge.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                // Triges når teksten fjernes
+                if (textView.getText().toString().equals("")){
+                    return false;
+                }
+
                 // TODO: Input validering
                 String challenge = textView.getText().toString();
 
@@ -144,6 +144,8 @@ public class CreateRoom extends AppCompatActivity {
 
                 tempChallengeView.setText(challenge);
                 tempChallengeView.setId(challenges.size());
+
+                addChallenge.getText().clear();
 
                 return true;
             }
@@ -179,6 +181,7 @@ public class CreateRoom extends AppCompatActivity {
         }
 
         // TODO: Sende rommet til DB
+        db.createRoom(room);
 
         return false;
     }
