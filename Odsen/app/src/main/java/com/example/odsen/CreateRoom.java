@@ -54,7 +54,7 @@ public class CreateRoom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_room);
 
-        db = new DBFirebase("test");
+        db = new DBFirebase(IDB.ROOMS);
 
         name = findViewById(R.id.CREATE_name_of_room);
         addFriends = findViewById(R.id.CREATE_add_friends);

@@ -25,4 +25,27 @@ public class Challenge {
             throw new Exception("Challenge already completed by another user");
         }
     }
+
+    public Challenge() {
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getCompletedBy() {
+        return completedBy;
+    }
+
+    public void setCompletedBy(String completedBy) {
+        this.completedBy = completedBy;
+    }
+
+    public Date getDateCompleted() {
+        return dateCompleted;
+    }
+
+    public void setDateCompleted(Date dateCompleted) {
+        this.dateCompleted = dateCompleted;
+    }
 }

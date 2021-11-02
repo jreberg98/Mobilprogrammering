@@ -42,4 +42,27 @@ public class Room {
     public ArrayList<Challenge> getChallenges() {
         return challenges;
     }
+
+    public Room() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPlayers(ArrayList<String> players) {
+        this.players = players;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setEndNumberOfChallenges(int endNumberOfChallenges) {
+        this.endNumberOfChallenges = endNumberOfChallenges;
+    }
+
+    public void setChallenges(ArrayList<Challenge> challenges) {
+        this.challenges = challenges;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.odsen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,55 +12,63 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 public class OpenRoomsList extends AppCompatActivity {
 
     public final String ROOM_KEY = "ROOM_KEY";
-    
+
     // Views
     private TextView titleView;
     private LinearLayout roomHolder;
     private EditText filterByNumberOfUsers;
     private EditText filterByPlayer;
     private EditText filterByRemainingChallenges;
-    
+
     // Data
+    private IDB db;
     private ArrayList<Room> rooms = new ArrayList<>();
+    private FirebaseFirestore storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_rooms_list);
-        
-        
+
+        storage = FirebaseFirestore.getInstance();
+        loadRooms("espen");
+
         titleView = findViewById(R.id.OPEN_ROOMS_title);
         roomHolder = findViewById(R.id.OPEN_ROOMS_room);
         filterByNumberOfUsers = findViewById(R.id.OPEN_ROOMS_filter_by_number_of_players);
         filterByPlayer = findViewById(R.id.OPEN_ROOMS_filter_by_user);
         filterByRemainingChallenges = findViewById(R.id.OPEN_ROOMS_filter_remaining_challenges);
-        
-        
-        
+
+
         // TODO: Fylle rooms med rom fra DB
-        
-        if (((int) (Math.random() * 10) % 2) == 0){
-            rooms.add(new Room("Dusterom", new ArrayList<String>(), 0, new ArrayList<Challenge>()));
-        }
-        
+
+
+/*
         if (rooms.isEmpty()) {
+            // TODO: Bytte til LogTags istedenfor harkoda verdier
             // TODO: gjør noe når du ikke har noen rom
-            Log.i("OPEN ROOMS","Ingen rom");
+            Log.i("OPEN ROOMS", "Ingen rom");
         } else {
             // Lister opp alle rom
             Log.i("OPEN ROOMS", "Du har " + rooms.size() + " aktive rom");
 
             String title = getString(R.string.OPEN_ROOMS_title, rooms.size());
             titleView.setText(title);
-
+*/
 
             // Oppdaterer lista med rom
-            for(int i = 0; i < rooms.size(); i++) {
+            for (int i = 0; i < rooms.size(); i++) {
                 Room room = rooms.get(i);
                 TextView textView = new TextView(roomHolder.getContext());
 
@@ -82,7 +91,6 @@ public class OpenRoomsList extends AppCompatActivity {
 
             }
         }
-    }
 
     private Intent intentToRoom(View view) {
         Intent intent = new Intent(getBaseContext(), ActiveRoom.class);
@@ -94,5 +102,27 @@ public class OpenRoomsList extends AppCompatActivity {
         Log.i(LogTags.NAVIGATION, "OpenRooms: Lager intent til " + textView.getText());
 
         return intent;
+    }
+
+    private void loadRooms(String username) {
+
+        storage.collection(IDB.ROOMS)
+                .whereArrayContains("players", username)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        Room room = document.toObject(Room.class);
+                        rooms.add(room);
+                    }
+                    Log.i("OPEN ROOMS", "Du har " + rooms.size() + " aktive rom");
+
+                    String title = getString(R.string.OPEN_ROOMS_title, rooms.size());
+                    titleView.setText(title);
+                }
+            }
+        });
+
     }
 }
