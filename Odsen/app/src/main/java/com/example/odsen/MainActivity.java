@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent openRoomsIntent = new Intent(view.getContext(), OpenRoomsList.class);
 
-                Log.i(NAVIGATION, "Going to 'OpenRooms'");
+                Log.i(LogTags.NAVIGATION, "Going to 'OpenRooms'");
 
                 startActivity(openRoomsIntent);
             }
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent findFriendsIntent = new Intent(view.getContext(), FindFriends.class);
 
-                Log.i(NAVIGATION, "Going to 'FindFriends'");
+                Log.i(LogTags.NAVIGATION, "Going to 'FindFriends'");
 
                 startActivity(findFriendsIntent);
             }
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent createRoomIntent = new Intent(view.getContext(), CreateRoom.class);
 
-                Log.i(NAVIGATION, "Going to 'CreateRoom'");
+                Log.i(LogTags.NAVIGATION, "Going to 'CreateRoom'");
 
                 startActivity(createRoomIntent);
             }
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent finishedRoomsIntent = new Intent(view.getContext(), FinishedRooms.class);
 
-                Log.i(NAVIGATION, "Going to 'FinishedRooms'");
+                Log.i(LogTags.NAVIGATION, "Going to 'FinishedRooms'");
 
                 startActivity(finishedRoomsIntent);
             }
