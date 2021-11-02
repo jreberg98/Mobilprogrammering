@@ -51,58 +51,9 @@ public class OpenRoomsList extends AppCompatActivity {
         filterByRemainingChallenges = findViewById(R.id.OPEN_ROOMS_filter_remaining_challenges);
 
 
-        // TODO: Fylle rooms med rom fra DB
 
-
-/*
-        if (rooms.isEmpty()) {
-            // TODO: Bytte til LogTags istedenfor harkoda verdier
-            // TODO: gjør noe når du ikke har noen rom
-            Log.i("OPEN ROOMS", "Ingen rom");
-        } else {
-            // Lister opp alle rom
-            Log.i("OPEN ROOMS", "Du har " + rooms.size() + " aktive rom");
-
-            String title = getString(R.string.OPEN_ROOMS_title, rooms.size());
-            titleView.setText(title);
-*/
-
-            // Oppdaterer lista med rom
-            for (int i = 0; i < rooms.size(); i++) {
-                Room room = rooms.get(i);
-                TextView textView = new TextView(roomHolder.getContext());
-
-                textView.setText(room.getName());
-                textView.setId(i);
-                textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
-
-                // Kan trykke på TextViewet for å gå til rommet
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = intentToRoom(view);
-
-                        Log.i(LogTags.NAVIGATION, "Open rooms: Går til " + room.getName());
-                        startActivity(intent);
-                    }
-                });
-
-                roomHolder.addView(textView);
-
-            }
         }
 
-    private Intent intentToRoom(View view) {
-        Intent intent = new Intent(getBaseContext(), ActiveRoom.class);
-
-        TextView textView = (TextView) view;
-
-        intent.putExtra(ROOM_KEY, textView.getText());
-
-        Log.i(LogTags.NAVIGATION, "OpenRooms: Lager intent til " + textView.getText());
-
-        return intent;
-    }
 
     private void loadRooms(String username) {
 
@@ -116,7 +67,7 @@ public class OpenRoomsList extends AppCompatActivity {
                         Room room = document.toObject(Room.class);
                         rooms.add(room);
                     }
-                    Log.i("OPEN ROOMS", "Du har " + rooms.size() + " aktive rom");
+                    Log.i(LogTags.LOADING_DATA, "Du har " + rooms.size() + " aktive rom");
 
                     String title = getString(R.string.OPEN_ROOMS_title, rooms.size());
                     titleView.setText(title);
@@ -124,5 +75,39 @@ public class OpenRoomsList extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateRoomListUI() {
+        for (int i = 0; i < rooms.size(); i++) {
+            Room room = rooms.get(i);
+            TextView textView = new TextView(roomHolder.getContext());
+
+            textView.setText(room.getName());
+            textView.setId(i);
+            textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = intentToRoom(view);
+
+                    Log.i(LogTags.NAVIGATION, "Open rooms: Går til " + room.getName());
+                    startActivity(intent);
+                }
+            });
+
+            roomHolder.addView(textView);
+
+        }
+    }
+
+    private Intent intentToRoom(View view) {
+        Intent intent = new Intent(getBaseContext(), ActiveRoom.class);
+        TextView textView = (TextView) view;
+
+        intent.putExtra(ROOM_KEY, textView.getText());
+        Log.i(LogTags.NAVIGATION, "OpenRooms: Lager intent til " + textView.getText());
+
+        return intent;
     }
 }
