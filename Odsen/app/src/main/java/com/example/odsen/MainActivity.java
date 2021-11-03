@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
                         Player temp = new Player(user.getUid(), user.getEmail(), user.getDisplayName());
 
                         storage.collection(IDB.USERS)
-                                .add(temp);
+                                .document(temp.getIdentifier()).set(temp);
                     }
                 } else {
                     Log.e(LogTags.LOADING_DATA, "Main: kunne ikke laste data: " + task.getException());

@@ -1,7 +1,6 @@
 package com.example.odsen;
 
-import static java.lang.Math.random;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,7 +13,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firestore.v1.Document;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class FindFriends extends AppCompatActivity {
 
@@ -32,10 +45,19 @@ public class FindFriends extends AppCompatActivity {
     private ArrayList<String> incomingFriendRequests;
     private ArrayList<String> outFriendRequests = new ArrayList<>();
 
+    // Eksternt
+    private FirebaseUser user;
+    private FirebaseFirestore storage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
+
+        storage = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+
 
         usernameInput = findViewById(R.id.FRIENDS_add_with_user_name);
         qrCodePlaceholder = findViewById(R.id.FRIENDS_qr_code_placeholder);
@@ -88,6 +110,8 @@ public class FindFriends extends AppCompatActivity {
                 Log.d(LogTags.ANY_INPUT, "FindFriends: Sendt vennefroespørsel til " + username);
                 // TODO: Sende venneforespørsel til DB
 
+                addFriend(username);
+
                 return true;
             }
         });
@@ -118,5 +142,11 @@ public class FindFriends extends AppCompatActivity {
         if (!outFriendRequests.isEmpty()) {
             infoSendFriendRequest.setText("Sendte forespørsler");
         }
+    }
+
+    private void addFriend(String displayName) {
+        // TODO: Legge til godkjenning på venneforespørsler
+        storage.collection(IDB.USERS).document(displayName).update("friends", FieldValue.arrayUnion(user.getEmail()));
+        storage.collection(IDB.USERS).document(user.getEmail()).update("friends", FieldValue.arrayUnion(displayName));
     }
 }
