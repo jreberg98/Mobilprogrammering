@@ -146,7 +146,7 @@ public class FindFriends extends AppCompatActivity {
 
     private void addFriend(String displayName) {
         // TODO: Legge til godkjenning på venneforespørsler
-        storage.collection(IDB.USERS).document(displayName).update("friends", FieldValue.arrayUnion(user.getEmail()));
-        storage.collection(IDB.USERS).document(user.getEmail()).update("friends", FieldValue.arrayUnion(displayName));
+        storage.collection(IDB.USERS).document(displayName).update("friendRequests", FieldValue.arrayUnion(user.getEmail()));
+        storage.collection(IDB.USERS).document(user.getEmail()).update("pendingRequests", FieldValue.arrayUnion(displayName));
     }
 }
