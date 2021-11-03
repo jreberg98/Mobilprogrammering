@@ -107,25 +107,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AuthUI.getInstance().signOut(getApplicationContext())
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                                Log.i(LogTags.USER_LOGGING, "Bruker logget ut");
-                                // Avslutter appen
-
-                            }
-                        });
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Log.i(LogTags.USER_LOGGING, "Bruker logget ut");
+                        }
+                });
             }
         });
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        loggedInn = findViewById(R.id.MAIN_logged_inn_user);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         storage = FirebaseFirestore.getInstance();
+        user = firebaseAuth.getCurrentUser();
 
         createAuthStateListener();
     }
-
+/*
     @Override
     protected void onStart() {
         super.onStart();
@@ -133,11 +132,25 @@ public class MainActivity extends AppCompatActivity {
         String userText = getString(R.string.MAIN_logged_inn_as, "dust");
         loggedInn.setText(userText);
     }
-
+*/
     @Override
     protected void onResume() {
         super.onResume();
         firebaseAuth.addAuthStateListener(authStateListener);
+
+        if (user == null) {
+            Log.i(LogTags.USER_LOGGING, "Main: du er logget av, logger deg på igjen -.-");
+
+            user = FirebaseAuth.getInstance().getCurrentUser();
+
+            if (user == null){
+                Log.e(LogTags.USER_LOGGING, "Main: kunne ikke logge deg på -.-");
+                Log.e(LogTags.ILLEGAL_INPUT, "Kommet inn på main uten å være logget inn");
+            }
+        }
+
+        String usertext = getString(R.string.MAIN_logged_inn_as, user.getDisplayName());
+        loggedInn.setText(usertext);
     }
 
     @Override
@@ -166,6 +179,8 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    // Kopiert fra nettet, dokumentasjonen til enten Firebase eller Developer.Android (eller begge)
+    // TODO: Finne link til koden
     // See: https://developer.android.com/training/basics/intents/result
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
@@ -176,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     );
-
 
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
