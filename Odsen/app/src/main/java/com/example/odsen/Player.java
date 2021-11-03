@@ -7,6 +7,8 @@ public class Player {
     private String Identifier;
     private String displayName;
     private ArrayList<String> friends;
+    private ArrayList<String> pendingRequests;
+    private ArrayList<String> friendRequests;
 
     public Player(){
 
@@ -41,5 +43,17 @@ public class Player {
     }
     public void setFriends(ArrayList<String> friends) {
         this.friends = friends;
+    }
+    public ArrayList<String> getPendingRequests() {
+        return pendingRequests;
+    }
+    public void setPendingRequests(ArrayList<String> pendingRequests) {
+        this.pendingRequests = pendingRequests;
+    }
+    public ArrayList<String> getFriendRequests() {
+        return friendRequests;
+    }
+    public void setFriendRequests(ArrayList<String> friendRequests) {
+        this.friendRequests = friendRequests;
     }
 }

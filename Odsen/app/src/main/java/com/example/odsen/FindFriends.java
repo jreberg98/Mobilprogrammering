@@ -44,6 +44,7 @@ public class FindFriends extends AppCompatActivity {
     // TODO: oppdatere begge listene fra DB
     private ArrayList<String> incomingFriendRequests;
     private ArrayList<String> outFriendRequests = new ArrayList<>();
+    Player player;
 
     // Eksternt
     private FirebaseUser user;
@@ -57,7 +58,7 @@ public class FindFriends extends AppCompatActivity {
         storage = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-
+        loadPlayer();
 
         usernameInput = findViewById(R.id.FRIENDS_add_with_user_name);
         qrCodePlaceholder = findViewById(R.id.FRIENDS_qr_code_placeholder);
@@ -148,5 +149,22 @@ public class FindFriends extends AppCompatActivity {
         // TODO: Legge til godkjenning på venneforespørsler
         storage.collection(IDB.USERS).document(displayName).update("friendRequests", FieldValue.arrayUnion(user.getEmail()));
         storage.collection(IDB.USERS).document(user.getEmail()).update("pendingRequests", FieldValue.arrayUnion(displayName));
+    }
+
+    private void loadPlayer() {
+        storage.collection(IDB.USERS)
+                .document(user.getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    player = task.getResult().toObject(Player.class);
+                } else {
+                    Log.e(LogTags.LOADING_DATA, "FindFriends: loadPlayer " + task.getException());
+                }
+            }
+        });
+
     }
 }
