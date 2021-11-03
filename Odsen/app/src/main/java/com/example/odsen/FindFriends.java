@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,23 +70,6 @@ public class FindFriends extends AppCompatActivity {
         infoSendFriendRequest = findViewById(R.id.FRIENDS_sent_friend_requests_text);
 
 
-        // Sjekker etter nye venner
-        ArrayList<String> friends = newFriendRequests();
-        if (friends != null) {
-            for (int i = 0; i < friends.size(); i++) {
-                TextView tempFriend = new TextView(friendList.getContext());
-
-                tempFriend.setText(friends.get(i));
-                tempFriend.setId(i);
-                tempFriend.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                tempFriend.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
-
-                friendList.addView(tempFriend);
-            }
-        } else {
-            infoNewFriendRequests.setText("");
-        }
-
 
 
         usernameInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -119,26 +103,6 @@ public class FindFriends extends AppCompatActivity {
 
     }
 
-    private ArrayList<String> newFriendRequests() {
-        // TODO: sjekk DB etter nye venner
-
-        int random = (int) (Math.random() * 10);
-
-        // Returnerer random en ArrayList ettersom DB ikke er satt opp
-        if (random % 2 == 0) {
-            Log.i("FRIENDS", "Har venner");
-            ArrayList<String> temp = new ArrayList<String>();
-            temp.add("dust");
-            temp.add("gjøk");
-            temp.add("tosk");
-            temp.add("pute");
-            temp.add("fisk");
-            return temp;
-        }
-        Log.i(LogTags.LOADING_DATA, "FindFriends: Laster inn venner");
-        return null;
-    }
-
     private void checkTitle() {
         if (!outFriendRequests.isEmpty()) {
             infoSendFriendRequest.setText("Sendte forespørsler");
@@ -160,11 +124,40 @@ public class FindFriends extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     player = task.getResult().toObject(Player.class);
+                    loadNewFriendRequests();
                 } else {
                     Log.e(LogTags.LOADING_DATA, "FindFriends: loadPlayer " + task.getException());
                 }
             }
         });
+    }
 
+    private void loadNewFriendRequests() {
+        Log.i("TAG", String.valueOf(player.getFriendRequests()));
+        Log.i("TAG", "getfriendrequests " + player.getFriendRequests().size());
+
+        for (int i = 0; i < player.getFriendRequests().size(); i++){
+            String friend = player.getFriendRequests().get(i);
+            TextView textView = new TextView(this.getBaseContext());
+
+            textView.setText(friend);
+            textView.setId(i);
+            textView.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    acceptFriend(friend);
+                }
+            });
+
+            friendList.addView(textView);
+
+        }
+    }
+
+    private void acceptFriend(String friend){
+        Log.i("TAG", "klikk " + friend);
     }
 }

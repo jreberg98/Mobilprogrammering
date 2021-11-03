@@ -6,9 +6,9 @@ public class Player {
     private String UID;
     private String Identifier;
     private String displayName;
-    private ArrayList<String> friends;
-    private ArrayList<String> pendingRequests;
-    private ArrayList<String> friendRequests;
+    private ArrayList<String> friends = new ArrayList<>();
+    private ArrayList<String> pendingRequests = new ArrayList<>();
+    private ArrayList<String> friendRequests = new ArrayList<>();
 
     public Player(){
 
