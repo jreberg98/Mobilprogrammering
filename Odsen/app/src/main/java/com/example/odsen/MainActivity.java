@@ -29,7 +29,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final String NAVIGATION = "NAVIGATING";
+    public static final String USER_KEY = "USER_ID";
 
     private Button MAIN_open_rooms;
     private Button MAIN_find_friends;
@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private Button MAIN_logg_out;
     private TextView loggedInn;
 
+    // Eksternt
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent openRoomsIntent = new Intent(view.getContext(), OpenRoomsList.class);
+                Log.i(LogTags.USER_LOGGING, String.valueOf(user));
+                openRoomsIntent.putExtra(USER_KEY, user.getUid());
 
                 Log.i(LogTags.NAVIGATION, "Going to 'OpenRooms'");
 
@@ -173,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            user = FirebaseAuth.getInstance().getCurrentUser();
 
             String username = user.getDisplayName();
             String userText = "";

@@ -11,9 +11,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,6 +38,7 @@ public class OpenRoomsList extends AppCompatActivity {
     private IDB db;
     private ArrayList<Room> rooms = new ArrayList<>();
     private FirebaseFirestore storage;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +46,27 @@ public class OpenRoomsList extends AppCompatActivity {
         setContentView(R.layout.activity_open_rooms_list);
 
         storage = FirebaseFirestore.getInstance();
-        loadRooms("espen");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user == null) {
+            Toast toast = Toast.makeText(this, "Kunne ikke holde deg innlogget :(", Toast.LENGTH_LONG);
+        }
+
+        loadRooms(user.getUid());
 
         titleView = findViewById(R.id.OPEN_ROOMS_title);
         roomHolder = findViewById(R.id.OPEN_ROOMS_room);
         filterByNumberOfUsers = findViewById(R.id.OPEN_ROOMS_filter_by_number_of_players);
         filterByPlayer = findViewById(R.id.OPEN_ROOMS_filter_by_user);
         filterByRemainingChallenges = findViewById(R.id.OPEN_ROOMS_filter_remaining_challenges);
-
-
-
         }
 
 
-    private void loadRooms(String username) {
+
+    private void loadRooms(String userID) {
 
         storage.collection(IDB.ROOMS)
-                .whereArrayContains("players", username)
+                .whereArrayContains("players", userID)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
