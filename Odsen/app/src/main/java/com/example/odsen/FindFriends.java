@@ -133,8 +133,9 @@ public class FindFriends extends AppCompatActivity {
     }
 
     private void loadNewFriendRequests() {
-        Log.i("TAG", String.valueOf(player.getFriendRequests()));
-        Log.i("TAG", "getfriendrequests " + player.getFriendRequests().size());
+        // Tømet lista, kan dermed brukes flere ganger
+        // TODO: erstatte med recycleView ?
+        friendList.removeAllViewsInLayout();
 
         for (int i = 0; i < player.getFriendRequests().size(); i++){
             String friend = player.getFriendRequests().get(i);
@@ -158,6 +159,22 @@ public class FindFriends extends AppCompatActivity {
     }
 
     private void acceptFriend(String friend){
-        Log.i("TAG", "klikk " + friend);
+        // Flytter nåværende bruker sin venneforespørsel fra friendRequests til friends i DB
+        storage.collection(IDB.USERS)
+                .document(player.getIdentifier())
+                .update("friendRequests", FieldValue.arrayRemove(friend),
+                "friends", FieldValue.arrayUnion(friend));
+
+        // Tilsvarende som over, bare for den som sendte forespørselen
+        storage.collection(IDB.USERS)
+                .document(friend)
+                .update("pendingRequests", FieldValue.arrayRemove(player.getIdentifier()),
+                        "friends", FieldValue.arrayUnion(player.getIdentifier()));
+
+
+        // Oppdaterer brukeren i minnet i appen
+        player.getFriendRequests().remove(friend);
+        // Oppdaterer UI
+        loadNewFriendRequests();
     }
 }
