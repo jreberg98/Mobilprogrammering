@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
+    private FirebaseFirestore storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent openRoomsIntent = new Intent(view.getContext(), OpenRoomsList.class);
-                Log.i(LogTags.USER_LOGGING, String.valueOf(user));
+
                 openRoomsIntent.putExtra(USER_KEY, user.getUid());
 
                 Log.i(LogTags.NAVIGATION, "Going to 'OpenRooms'");
@@ -117,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        storage = FirebaseFirestore.getInstance();
 
         createAuthStateListener();
     }
@@ -190,6 +195,8 @@ public class MainActivity extends AppCompatActivity {
                 userText = getString(R.string.MAIN_logged_inn_as, "en navnløs bruker");
             }
 
+            addUserToDB();
+
             loggedInn.setText(userText);
         } else {
             // Sign in failed. If response is null the user canceled the
@@ -205,6 +212,31 @@ public class MainActivity extends AppCompatActivity {
             System.exit(0);
 
         }
+    }
+
+    // Legger bruker til i DB, så den kan brukes av flere
+    private void addUserToDB(){
+        Log.i(LogTags.USER_LOGGING, "Legger til i DB");
+        storage.collection(IDB.USERS)
+                .whereEqualTo("uid", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    // Bruker er ikke i DB, legger den da til
+                    if (task.getResult().isEmpty()) {
+                        Log.i(LogTags.USER_LOGGING, "Main: legger til brukerdata i \"vanlig\" db");
+                        Player temp = new Player(user.getUid(), user.getEmail(), user.getDisplayName());
+
+                        storage.collection(IDB.USERS)
+                                .add(temp);
+                    }
+                } else {
+                    Log.e(LogTags.LOADING_DATA, "Main: kunne ikke laste data: " + task.getException());
+                }
+            }
+        });
     }
 
 }

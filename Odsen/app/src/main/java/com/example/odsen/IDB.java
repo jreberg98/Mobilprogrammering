@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public interface IDB {
 
     String ROOMS = "ROOMS";
+    String USERS = "USERS";
 
     // Insetting av data
     void createRoom(Room room);
