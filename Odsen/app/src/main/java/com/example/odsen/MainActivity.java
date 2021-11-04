@@ -148,9 +148,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(LogTags.ILLEGAL_INPUT, "Kommet inn på main uten å være logget inn");
             }
         }
-
-        String usertext = getString(R.string.MAIN_logged_inn_as, user.getDisplayName());
-        loggedInn.setText(usertext);
     }
 
     @Override
