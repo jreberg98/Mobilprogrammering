@@ -1,5 +1,7 @@
 package com.example.odsen;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,5 +66,24 @@ public class Room {
 
     public void setChallenges(ArrayList<Challenge> challenges) {
         this.challenges = challenges;
+    }
+
+    public Challenge complete(String challengeText, String user){
+        int index = indexOfChallenge(challengeText);
+
+        challenges.get(index).complete(user);
+
+        return challenges.get(index);
+    }
+
+    private int indexOfChallenge(String challengeText){
+        for (int i = 0; i < challenges.size(); i++) {
+            if (challenges.get(i).getText().equals(challengeText)){
+                return i;
+            }
+        }
+        // Finner ikke elementet
+        Log.e(LogTags.ILLEGAL_INPUT, "Room: IndexOfChallenge: challenge ikke i rommet");
+        return -1;
     }
 }

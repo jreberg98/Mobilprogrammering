@@ -1,5 +1,7 @@
 package com.example.odsen;
 
+import android.util.Log;
+
 import java.util.Date;
 
 public class Challenge {
@@ -17,12 +19,12 @@ public class Challenge {
     }
 
 
-    public void complete(String user) throws Exception {
+    public void complete(String user)  {
         if (completedBy == null && dateCompleted == null) {
             completedBy = user;
             dateCompleted = new Date();
         } else if (completedBy != null && dateCompleted != null) {
-            throw new Exception("Challenge already completed by another user");
+            Log.e(LogTags.ILLEGAL_INPUT, "Challenge: kunne ikke fullføre challenge");
         }
     }
 
