@@ -1,5 +1,6 @@
 package com.example.odsen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -13,9 +14,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -46,7 +52,9 @@ public class CreateRoom extends AppCompatActivity {
     private LinearLayout challengeHolder;
 
     // Eksterne vektøy
-    private IDB db;
+    private FirebaseFirestore storage;
+    private FirebaseUser user;
+    private Player player;
 
 
     @Override
@@ -54,7 +62,10 @@ public class CreateRoom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_room);
 
-        db = new DBFirebase(IDB.ROOMS);
+        storage = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        loadPlayer();
 
         name = findViewById(R.id.CREATE_name_of_room);
         addFriends = findViewById(R.id.CREATE_add_friends);
@@ -155,7 +166,7 @@ public class CreateRoom extends AppCompatActivity {
     // Sjekker verdien på radioknapp, og oppdaterer variablene
     private void radioButtonClick(View view) {
         boolean checked = ((RadioButton) view).isChecked();
-        Log.d(LogTags.ANY_INPUT, "radioButtonClick: ");
+        // TODO: Velge en verdi avhengig av valget
         switch (view.getId()) {
             case R.id.CREATE_radio_challenges:
                 if (checked)
@@ -172,7 +183,7 @@ public class CreateRoom extends AppCompatActivity {
     }
 
     // Lager rommet, og sender til DB
-    private boolean createRoom(){
+    private void createRoom(){
         Room room = null;
         if (winAfterTime) {
             room = new Room(name.getText().toString(), friends, endDate, challenges);
@@ -180,9 +191,26 @@ public class CreateRoom extends AppCompatActivity {
             room = new Room(name.getText().toString(), friends, endChallenges, challenges);
         }
 
-        // TODO: Sende rommet til DB
-        db.createRoom(room);
+        room.getPlayers().add(player.getIdentifier());
 
-        return false;
+        storage.collection(IDB.ROOMS).add(room);
+
+        this.finish();
+    }
+
+    private void loadPlayer() {
+        storage.collection(IDB.USERS)
+                .document(user.getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            player = task.getResult().toObject(Player.class);
+                        } else {
+                            Log.e(LogTags.LOADING_DATA, "CreateRoom: loadPlayer " + task.getException());
+                        }
+                    }
+                });
     }
 }
