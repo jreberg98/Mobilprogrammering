@@ -73,49 +73,50 @@ public class OpenRoomsList extends AppCompatActivity {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()){
                         Room room = document.toObject(Room.class);
+
+                        String documentID = document.getId();
+
                         rooms.add(room);
+                        addRoomToUI(room.getName(), documentID);
                     }
                     Log.i(LogTags.LOADING_DATA, "Du har " + rooms.size() + " aktive rom");
 
                     String title = getString(R.string.OPEN_ROOMS_title, rooms.size());
                     titleView.setText(title);
                 }
-                updateRoomListUI();
             }
         });
 
     }
 
-    private void updateRoomListUI() {
-        for (int i = 0; i < rooms.size(); i++) {
-            Room room = rooms.get(i);
-            TextView textView = new TextView(roomHolder.getContext());
 
-            textView.setText(room.getName());
-            textView.setId(i);
-            textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+    private void addRoomToUI(String roomName, String documentID) {
+        TextView textView = new TextView(roomHolder.getContext());
 
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = intentToRoom(view);
+        textView.setText(roomName);
+        textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+        textView.setTag(documentID);
 
-                    Log.i(LogTags.NAVIGATION, "Open rooms: Går til " + room.getName());
-                    startActivity(intent);
-                }
-            });
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = intentToRoom(view);
 
-            roomHolder.addView(textView);
+                startActivity(intent);
+            }
+        });
 
-        }
+        roomHolder.addView(textView);
     }
 
     private Intent intentToRoom(View view) {
         Intent intent = new Intent(getBaseContext(), ActiveRoom.class);
         TextView textView = (TextView) view;
 
-        intent.putExtra(ROOM_KEY, textView.getText());
-        Log.i(LogTags.NAVIGATION, "OpenRooms: Lager intent til " + textView.getText());
+        String tag = (String) view.getTag();
+
+        intent.putExtra(ROOM_KEY, tag);
+        Log.i(LogTags.NAVIGATION, "OpenRooms: Lager intent til " + textView.getText() + " med ID " + tag);
 
         return intent;
     }
