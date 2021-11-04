@@ -34,4 +34,8 @@
     <string name="OPEN_ROOMS_filter_after_challenges">Gjennværende \nutfordringer</string>
 
 
+    <!--  Alle tekstverdier for et åpent rom  -->
+    <string name="ACTIVE_ROOM_title">%s</string>
+
+
 </resources>

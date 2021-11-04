@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class OpenRoomsList extends AppCompatActivity {
 
-    public final String ROOM_KEY = "ROOM_KEY";
+    public static final String ROOM_KEY = "ROOM_KEY";
 
     // Views
     private TextView titleView;
