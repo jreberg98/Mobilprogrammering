@@ -15,6 +15,8 @@ import com.example.odsen.Model.Challenge;
 import com.example.odsen.Model.Player;
 import com.example.odsen.Model.PlayerInRoom;
 import com.example.odsen.Model.Room;
+import com.example.odsen.Tags.DBTags;
+import com.example.odsen.Tags.LogTags;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,12 +65,13 @@ public class ActiveRoom extends AppCompatActivity {
 
 
     private void loadPlayer() {
-        storage.collection(IDB.USERS)
+        storage.collection(DBTags.USER)
             .document(user.getEmail())
             .get()
             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    Log.i(LogTags.USER_LOGGING, "ActiveRoom: loadPlayer: " + task.getResult().getId());
                     if (task.isSuccessful()) {
                         player = task.getResult().toObject(Player.class);
                     } else {
@@ -79,7 +82,7 @@ public class ActiveRoom extends AppCompatActivity {
     }
 
     private void loadRoom() {
-        storage.collection(IDB.ROOMS)
+        storage.collection(DBTags.ROOM)
                 .document(document)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -137,11 +140,12 @@ public class ActiveRoom extends AppCompatActivity {
             public void onClick(View view) {
                 Challenge temp = new Challenge();
                 temp.setText(challengeText);
-                storage.collection(IDB.ROOMS).document(document).update("challenges", FieldValue.arrayRemove(temp));
+                // TODO: Funker ikke å fjerne ?
+                storage.collection(DBTags.ROOM).document(document).update(DBTags.ROOM_CHALLENGES, FieldValue.arrayRemove(temp));
 
                 Challenge challenge = room.complete(challengeText, player.getIdentifier());
 
-                storage.collection(IDB.ROOMS).document(document).update("challenges", FieldValue.arrayUnion(challenge));
+                storage.collection(DBTags.ROOM).document(document).update(DBTags.ROOM_CHALLENGES, FieldValue.arrayUnion(challenge));
 
                 // TODO: bare oppdatere challenges
                 updateUI();
@@ -150,7 +154,6 @@ public class ActiveRoom extends AppCompatActivity {
     }
 
     private void loadLeaderboard() {
-        Log.i("TAG", "loadLeaderboard: ");
 
         // Lager liste med alle spillerne i rommet
         ArrayList<PlayerInRoom> players = new ArrayList<>();

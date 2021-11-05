@@ -1,4 +1,4 @@
-package com.example.odsen;
+package com.example.odsen.Tags;
 
 // Egen klasse for alle logtagger. Tanken er å gjøre det lettere å endre en tag dersom det skulle vært behov for det
 // Når det logges brukes en Tag som kategori, istedenfor hvor i appen Log trigges fra. Derfor må det i log beskjed komme fram hvor loggen kommer.

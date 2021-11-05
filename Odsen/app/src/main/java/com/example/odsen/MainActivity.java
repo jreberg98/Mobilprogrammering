@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.odsen.Model.Player;
+import com.example.odsen.Tags.DBTags;
+import com.example.odsen.Tags.LogTags;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
@@ -29,6 +31,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Nøkkel som brukes til Intent#putExtra
+    // I tillegg til Intent#getExtra()
     public static final String USER_KEY = "USER_ID";
 
     private Button MAIN_open_rooms;
@@ -122,15 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         createAuthStateListener();
     }
-/*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        loggedInn = findViewById(R.id.MAIN_logged_inn_user);
-        String userText = getString(R.string.MAIN_logged_inn_as, "dust");
-        loggedInn.setText(userText);
-    }
-*/
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -226,8 +222,8 @@ public class MainActivity extends AppCompatActivity {
     // Legger bruker til i DB, så den kan brukes av flere
     private void addUserToDB(){
         Log.i(LogTags.USER_LOGGING, "Legger til i DB");
-        storage.collection(IDB.USERS)
-                .whereEqualTo("uid", user.getUid())
+        storage.collection(DBTags.USER)
+                .whereEqualTo(DBTags.USER_UID, user.getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -238,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(LogTags.USER_LOGGING, "Main: legger til brukerdata i \"vanlig\" db");
                         Player temp = new Player(user.getUid(), user.getEmail(), user.getDisplayName());
 
-                        storage.collection(IDB.USERS)
+                        storage.collection(DBTags.USER)
                                 .document(temp.getIdentifier()).set(temp);
                     }
                 } else {

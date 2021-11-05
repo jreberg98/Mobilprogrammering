@@ -2,7 +2,7 @@ package com.example.odsen.Model;
 
 import android.util.Log;
 
-import com.example.odsen.LogTags;
+import com.example.odsen.Tags.LogTags;
 
 import java.util.Date;
 

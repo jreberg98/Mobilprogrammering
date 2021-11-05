@@ -2,8 +2,7 @@ package com.example.odsen.Model;
 
 import android.util.Log;
 
-import com.example.odsen.LogTags;
-import com.example.odsen.Model.Challenge;
+import com.example.odsen.Tags.LogTags;
 
 import java.util.ArrayList;
 import java.util.Date;

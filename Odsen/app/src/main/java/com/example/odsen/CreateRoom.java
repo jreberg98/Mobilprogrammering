@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.example.odsen.Model.Challenge;
 import com.example.odsen.Model.Player;
 import com.example.odsen.Model.Room;
+import com.example.odsen.Tags.DBTags;
+import com.example.odsen.Tags.LogTags;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -189,13 +191,13 @@ public class CreateRoom extends AppCompatActivity {
 
         room.getPlayers().add(player.getIdentifier());
 
-        storage.collection(IDB.ROOMS).add(room);
+        storage.collection(DBTags.ROOM).add(room);
 
         this.finish();
     }
 
     private void loadPlayer() {
-        storage.collection(IDB.USERS)
+        storage.collection(DBTags.USER)
                 .document(user.getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

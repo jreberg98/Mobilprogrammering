@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.odsen.Model.Player;
+import com.example.odsen.Tags.DBTags;
+import com.example.odsen.Tags.LogTags;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -88,7 +90,6 @@ public class FindFriends extends AppCompatActivity {
                 checkTitle();
 
                 Log.d(LogTags.ANY_INPUT, "FindFriends: Sendt vennefroespørsel til " + username);
-                // TODO: Sende venneforespørsel til DB
 
                 addFriend(username);
 
@@ -106,12 +107,12 @@ public class FindFriends extends AppCompatActivity {
 
     private void addFriend(String displayName) {
         // TODO: Legge til godkjenning på venneforespørsler
-        storage.collection(IDB.USERS).document(displayName).update("friendRequests", FieldValue.arrayUnion(user.getEmail()));
-        storage.collection(IDB.USERS).document(user.getEmail()).update("pendingRequests", FieldValue.arrayUnion(displayName));
+        storage.collection(DBTags.USER).document(displayName).update(DBTags.USER_FRIEND_REQUESTS, FieldValue.arrayUnion(user.getEmail()));
+        storage.collection(DBTags.USER).document(user.getEmail()).update(DBTags.USER_FRIEND_REQUESTS, FieldValue.arrayUnion(displayName));
     }
 
     private void loadPlayer() {
-        storage.collection(IDB.USERS)
+        storage.collection(DBTags.USER)
                 .document(user.getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -155,13 +156,13 @@ public class FindFriends extends AppCompatActivity {
 
     private void acceptFriend(String friend){
         // Flytter nåværende bruker sin venneforespørsel fra friendRequests til friends i DB
-        storage.collection(IDB.USERS)
+        storage.collection(DBTags.USER)
                 .document(player.getIdentifier())
                 .update("friendRequests", FieldValue.arrayRemove(friend),
                 "friends", FieldValue.arrayUnion(friend));
 
         // Tilsvarende som over, bare for den som sendte forespørselen
-        storage.collection(IDB.USERS)
+        storage.collection(DBTags.USER)
                 .document(friend)
                 .update("pendingRequests", FieldValue.arrayRemove(player.getIdentifier()),
                         "friends", FieldValue.arrayUnion(player.getIdentifier()));

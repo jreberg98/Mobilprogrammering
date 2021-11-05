@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.odsen.Model.Room;
+import com.example.odsen.Tags.DBTags;
+import com.example.odsen.Tags.LogTags;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +38,6 @@ public class OpenRoomsList extends AppCompatActivity {
     private EditText filterByRemainingChallenges;
 
     // Data
-    private IDB db;
     private ArrayList<Room> rooms = new ArrayList<>();
     private FirebaseFirestore storage;
     private FirebaseUser user;
@@ -66,7 +67,7 @@ public class OpenRoomsList extends AppCompatActivity {
 
     private void loadRooms(String userID) {
 
-        storage.collection(IDB.ROOMS)
+        storage.collection(DBTags.ROOM)
                 .whereArrayContains("players", userID)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
