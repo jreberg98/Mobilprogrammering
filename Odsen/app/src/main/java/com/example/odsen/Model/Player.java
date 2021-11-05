@@ -1,4 +1,4 @@
-package com.example.odsen;
+package com.example.odsen.Model;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.odsen;
+package com.example.odsen.Model;
 
 public class PlayerInRoom extends Player implements Comparable<PlayerInRoom> {
     private int challengesCompleted = 0;

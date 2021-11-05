@@ -1,6 +1,8 @@
 package com.example.odsen;
 
 
+import com.example.odsen.Model.Room;
+
 import java.util.ArrayList;
 
 // Eget interface for komunikasjon med DB

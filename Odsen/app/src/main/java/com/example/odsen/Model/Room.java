@@ -1,6 +1,9 @@
-package com.example.odsen;
+package com.example.odsen.Model;
 
 import android.util.Log;
+
+import com.example.odsen.LogTags;
+import com.example.odsen.Model.Challenge;
 
 import java.util.ArrayList;
 import java.util.Date;
