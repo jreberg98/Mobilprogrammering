@@ -95,6 +95,7 @@ public class ActiveRoom extends AppCompatActivity {
         title.setText(titleText);
 
         // Utfordringer
+        challengesHolder.removeAllViewsInLayout();
         for (Challenge challenge : room.getChallenges()) {
             TextView textView = new TextView(getApplicationContext());
             textView.setText(challenge.getText());
@@ -132,6 +133,9 @@ public class ActiveRoom extends AppCompatActivity {
                 Challenge challenge = room.complete(challengeText, player.getIdentifier());
 
                 storage.collection(IDB.ROOMS).document(document).update("challenges", FieldValue.arrayUnion(challenge));
+
+                // TODO: bare oppdatere challenges
+                updateUI();
             }
         });
     }
