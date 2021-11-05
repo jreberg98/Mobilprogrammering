@@ -19,6 +19,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class ActiveRoom extends AppCompatActivity {
 
     // Views
@@ -112,6 +118,8 @@ public class ActiveRoom extends AppCompatActivity {
             }
 
             challengesHolder.addView(textView);
+
+            loadLeaderboard();
         }
     }
 
@@ -138,5 +146,52 @@ public class ActiveRoom extends AppCompatActivity {
                 updateUI();
             }
         });
+    }
+
+    private void loadLeaderboard() {
+        Log.i("TAG", "loadLeaderboard: ");
+
+        // Lager liste med alle spillerne i rommet
+        ArrayList<PlayerInRoom> players = new ArrayList<>();
+        for (String p : room.getPlayers()) {
+            PlayerInRoom tempPlayer = new PlayerInRoom();
+
+            tempPlayer.setIdentifier(p);
+            // TODO: Hente rett display name
+            tempPlayer.setDisplayName(p);
+
+            players.add(tempPlayer);
+        }
+
+        // Går gjennom lista med alle challenges
+        for (Challenge challenge : room.getChallenges()) {
+            // Challenge er fullført
+            if (challenge.getCompletedBy() != null) {
+                // Sjekker alle brukere i rommet
+                for (PlayerInRoom playerInRoom : players) {
+                    // Rett bruker, oppdaterer da teller
+                    if (playerInRoom.getIdentifier().equals(challenge.getCompletedBy())){
+                        playerInRoom.addChallenge();
+                    }
+                }
+            }
+        }
+
+        // Sorterer lista, den som leder øverst
+        Collections.sort(players);
+        Collections.reverse(players);
+
+        // Skriver ut brukerne
+        leaderboardHolder.removeAllViewsInLayout();
+        for (int i = 0; i < players.size(); i++){
+
+            TextView textView = new TextView(getApplicationContext());
+            String text = players.get(i).getIdentifier() + " - " + players.get(i).getChallengesCompleted();
+            textView.setText(text);
+            textView.setId(i);
+            textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+
+            leaderboardHolder.addView(textView);
+        }
     }
 }
