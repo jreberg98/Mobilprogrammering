@@ -52,6 +52,7 @@ public class CreateRoom extends AppCompatActivity {
     // UI element som oppdateres for brukeren
     private LinearLayout friendHolder;
     private LinearLayout challengeHolder;
+    private TextView winCondition;
 
     // Eksterne vektøy
     private FirebaseFirestore storage;
@@ -77,6 +78,7 @@ public class CreateRoom extends AppCompatActivity {
         radioChallenge = findViewById(R.id.CREATE_radio_challenges);
         radioTime = findViewById(R.id.CREATE_radio_time);
         submit = findViewById(R.id.CREATE_submit_room);
+        winCondition = findViewById(R.id.CREATE_win_condition);
 
         // Hånterer radio valgene
         radioTime.setOnClickListener(new View.OnClickListener() {
@@ -212,13 +214,14 @@ public class CreateRoom extends AppCompatActivity {
         DatePickerDialog datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month++; // Måneder er 0 indeksert
-
                 GregorianCalendar calendar = new GregorianCalendar();
 
                 calendar.set(year, month, day);
 
                 endDate = calendar;
+
+                String winText = getString(R.string.CREATE_end_room_by_date, day, month, year);
+                winCondition.setText(winText);
             }
         },
                 Calendar.getInstance().get(Calendar.YEAR),

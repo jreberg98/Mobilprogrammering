@@ -18,6 +18,8 @@
     <string name="CREATE_win_condition_time">Den som leder etter tid</string>
     <string name="CREATE_add_challenge_placeholder"><b>Legg til utfordringer her</b></string>
     <string name="CREATE_submit_room">Opprett rommet</string>
+    <string name="CREATE_hint_add_win_condition">Velg hvordan rommet skal avsluttes</string>
+    <string name="CREATE_end_room_by_date">Rommet er åpent fram til %1$d, %2$d, %3$d</string>
 
     <!--  Alle tekstverdier for Find Frineds  -->
     <string name="FRIENDS_title"><big>Venner</big></string>
