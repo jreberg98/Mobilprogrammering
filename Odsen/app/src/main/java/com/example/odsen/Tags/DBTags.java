@@ -10,4 +10,6 @@ public class DBTags {
     public static final String USER = "USERS";
     public static final String USER_FRIEND_REQUESTS = "friendRequests";
     public static final String USER_UID = "uid";
+    public static final String PLAYERS = "players";
+    public static final String COMPLETED = "completed";
 }

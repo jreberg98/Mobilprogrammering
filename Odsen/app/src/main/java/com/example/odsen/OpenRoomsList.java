@@ -68,7 +68,8 @@ public class OpenRoomsList extends AppCompatActivity {
     private void loadRooms(String userID) {
 
         storage.collection(DBTags.ROOM)
-                .whereArrayContains("players", userID)
+                .whereArrayContains(DBTags.PLAYERS, userID)
+                .whereEqualTo(DBTags.COMPLETED, false)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
