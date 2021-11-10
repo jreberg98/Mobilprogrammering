@@ -81,6 +81,8 @@ public class FindFriends extends AppCompatActivity {
                     return false;
                 }
 
+                player.getPendingRequests().add(username);
+
                 outFriendRequests.add(username);
 
                 TextView tempRequest = new TextView(friendRequest.getContext());

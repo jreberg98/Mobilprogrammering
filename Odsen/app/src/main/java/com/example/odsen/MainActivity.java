@@ -53,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        storage = FirebaseFirestore.getInstance();
+        user = firebaseAuth.getCurrentUser();
+
+
         // Navigering til de andre skjermene
         MAIN_open_rooms = findViewById(R.id.MAIN_open_rooms);
         MAIN_open_rooms.setOnClickListener(new View.OnClickListener() {
@@ -120,9 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
         loggedInn = findViewById(R.id.MAIN_logged_inn_user);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        storage = FirebaseFirestore.getInstance();
-        user = firebaseAuth.getCurrentUser();
 
         createAuthStateListener();
     }
@@ -141,6 +143,20 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(LogTags.USER_LOGGING, "Main: kunne ikke logge deg på -.-");
                 Log.e(LogTags.ILLEGAL_INPUT, "Kommet inn på main uten å være logget inn");
             }
+        }
+
+        // Oppdaterer UI
+        if (user != null) {
+
+            String username = user.getDisplayName();
+            String userText = "";
+
+            if (username != null) {
+                userText = getString(R.string.MAIN_logged_inn_as, username);
+            } else {
+                userText = getString(R.string.MAIN_logged_inn_as, "en navnløs bruker");
+            }
+            loggedInn.setText(userText);
         }
     }
 
@@ -183,26 +199,17 @@ public class MainActivity extends AppCompatActivity {
             }
     );
 
+    // TODO: Hvor er detta kopiert fra? Kanskje dokumentasjonen til firebase?
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in
             user = FirebaseAuth.getInstance().getCurrentUser();
 
-            String username = user.getDisplayName();
-            String userText = "";
-
             Log.i(LogTags.USER_LOGGING, "Logget inn som " + user.getEmail());
-
-            if (username != null) {
-                userText = getString(R.string.MAIN_logged_inn_as, username);
-            } else {
-                userText = getString(R.string.MAIN_logged_inn_as, "en navnløs bruker");
-            }
 
             addUserToDB();
 
-            loggedInn.setText(userText);
         } else {
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
