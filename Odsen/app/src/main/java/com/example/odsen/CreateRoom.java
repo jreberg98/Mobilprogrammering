@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class CreateRoom extends AppCompatActivity {
@@ -49,7 +50,7 @@ public class CreateRoom extends AppCompatActivity {
     private boolean winAfterTime = true;
     private ArrayList<String> friends = new ArrayList<>();
     private ArrayList<Challenge> challenges = new ArrayList<>();
-    private GregorianCalendar endDate;
+    private Date endDate;
     private int endChallenges;
 
     // UI element som oppdateres for brukeren
@@ -222,11 +223,9 @@ public class CreateRoom extends AppCompatActivity {
         DatePickerDialog datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                GregorianCalendar calendar = new GregorianCalendar();
+                Date date = new Date(year, month, day);
 
-                calendar.set(year, month, day);
-
-                endDate = calendar;
+                endDate = date;
 
                 String winText = getString(R.string.CREATE_end_room_by_date, day, month, year);
                 winCondition.setText(winText);

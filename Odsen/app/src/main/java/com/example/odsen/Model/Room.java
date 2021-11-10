@@ -11,13 +11,16 @@ import java.util.GregorianCalendar;
 public class Room {
     private String name;
     private ArrayList<String> players;
-    private GregorianCalendar endDate;
+    // TODO: Bytte til anna dato format, denne måten å bruke Date på er depricated
+    // Calendar interface bør funke, men finner ingen implementasjon som passer.
+    // Eventuelt GregorianCalendar, men kan ikke deserialisere fra firebase
+    private Date endDate;
     private int endNumberOfChallenges;
     private ArrayList<Challenge> challenges;
 
 
     // To konstruktører, en for når rom slutter på tid og en for antall utfordringer
-    public Room(String name, ArrayList<String> players, GregorianCalendar endDate, ArrayList<Challenge> challenges) {
+    public Room(String name, ArrayList<String> players, Date endDate, ArrayList<Challenge> challenges) {
         this.name = name;
         this.players = players;
         this.endDate = endDate;
@@ -38,7 +41,7 @@ public class Room {
     public ArrayList<String> getPlayers() {
         return players;
     }
-    public GregorianCalendar getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
     public int getEndNumberOfChallenges() {
@@ -59,7 +62,7 @@ public class Room {
         this.players = players;
     }
 
-    public void setEndDate(GregorianCalendar endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
