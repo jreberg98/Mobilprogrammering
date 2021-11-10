@@ -262,6 +262,9 @@ public class CreateRoom extends AppCompatActivity {
                 .setView(layout)
                 .setPositiveButton(R.string.GENERAL_submit_dialog, (dialogInterface, i) -> {
                     endChallenges = picker.getValue();
+
+                    String winText = getString(R.string.CREATE_end_room_by_challenges, endChallenges);
+                    winCondition.setText(winText);
         })
                 .setNegativeButton(R.string.GENERAL_cancel_dialog, null)
                 .show();
