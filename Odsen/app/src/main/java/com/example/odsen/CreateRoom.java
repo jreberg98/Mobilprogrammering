@@ -1,17 +1,21 @@
 package com.example.odsen;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -29,7 +33,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class CreateRoom extends AppCompatActivity {
@@ -93,6 +96,8 @@ public class CreateRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 radioButtonClick(view);
+
+                promptNumber();
             }
         });
 
@@ -211,6 +216,9 @@ public class CreateRoom extends AppCompatActivity {
     }
 
     private void promptDate() {
+
+        Log.i(LogTags.ANY_INPUT, "CreateRoom: prompter dato");
+
         DatePickerDialog datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -229,6 +237,34 @@ public class CreateRoom extends AppCompatActivity {
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         );
         datePicker.show();
+    }
+
+    // https://stackoverflow.com/questions/17944061/how-to-use-number-picker-with-dialog - 10/11-21
+    private void promptNumber() {
+
+        Log.i(LogTags.ANY_INPUT, "CreateRoom: prompter tall");
+
+        NumberPicker picker = new NumberPicker(getBaseContext());
+        picker.setMinValue(1);
+        // TODO: Er detta en reel verdi eller bør den endres?
+        picker.setMaxValue(100);
+        picker.setValue(25);
+
+
+        FrameLayout layout = new FrameLayout(getBaseContext());
+        layout.addView(picker, new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER
+        ));
+
+        new AlertDialog.Builder(this)
+                .setView(layout)
+                .setPositiveButton(R.string.GENERAL_submit_dialog, (dialogInterface, i) -> {
+                    endChallenges = picker.getValue();
+        })
+                .setNegativeButton(R.string.GENERAL_cancel_dialog, null)
+                .show();
     }
 
 

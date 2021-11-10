@@ -40,4 +40,8 @@
     <string name="ACTIVE_ROOM_title">%s</string>
 
 
+    <!--  Generelt  -->
+    <string name="GENERAL_submit_dialog">OK</string>
+    <string name="GENERAL_cancel_dialog">Avbryt</string>
+
 </resources>
