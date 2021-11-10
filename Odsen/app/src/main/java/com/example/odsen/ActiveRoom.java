@@ -69,7 +69,13 @@ public class ActiveRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.i(LogTags.ANY_INPUT, "ActiveRoom: avslutter rommet " + room.getName() + " før det egentlig er ferdig");
-                // TODO: flytte rommet til en avslutta bucket i DB
+
+                /*  Firestore har ikke noen funksjonalitet for å flytte dokumenter, og må
+                 *  da eventuelt skrive det til ny lokasjon og deretter slette det orginale.
+                 *  Da er det bedre å bare markere at rommet er ferdig tenker jeg.
+                 */
+
+                storage.collection(DBTags.ROOM).document(document).update("completed", true);
             }
         });
     }
