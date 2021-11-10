@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class ActiveRoom extends AppCompatActivity {
     private TextView title;
     private LinearLayout challengesHolder;
     private LinearLayout leaderboardHolder;
-
+    private Button endRoom;
 
     // Data
     private Room room;
@@ -60,6 +61,17 @@ public class ActiveRoom extends AppCompatActivity {
         title = findViewById(R.id.ACTIVE_ROOM_title);
         challengesHolder = findViewById(R.id.ACTIVE_ROOM_challenges_holder);
         leaderboardHolder = findViewById(R.id.ACTIVE_ROOM_leaderboard_holder);
+        endRoom = findViewById(R.id.ACTIVE_ROOM_end_room);
+
+
+        // TODO: Sjekke om spiller har laget rommet / har rettigheter til å avlsutte rommet
+        endRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(LogTags.ANY_INPUT, "ActiveRoom: avslutter rommet " + room.getName() + " før det egentlig er ferdig");
+                // TODO: flytte rommet til en avslutta bucket i DB
+            }
+        });
     }
 
 
