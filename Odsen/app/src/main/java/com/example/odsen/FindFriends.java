@@ -75,6 +75,11 @@ public class FindFriends extends AppCompatActivity {
 
                 String username = textView.getText().toString();
 
+                // TODO: sjekke om bruker finnes
+                if (player.hasRelationWith(username)) {
+                    usernameInput.setError("Kan ikke legges til som venn, dere har allerede et forhold");
+                    return false;
+                }
 
                 outFriendRequests.add(username);
 

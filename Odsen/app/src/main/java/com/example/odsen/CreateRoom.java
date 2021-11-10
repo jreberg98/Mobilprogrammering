@@ -114,6 +114,12 @@ public class CreateRoom extends AppCompatActivity {
 
                 String friend = textView.getText().toString();
 
+                // Sjekker om man er venner
+                if (!player.isFriendsWith(friend)){
+                    addFriends.setError("Dere er ikke venner");
+                    return false;
+                }
+
                 // Legger vennen til i lista
                 friends.add(friend);
 

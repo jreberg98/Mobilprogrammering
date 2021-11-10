@@ -20,6 +20,39 @@ public class Player {
         this.displayName = displayName;
     }
 
+    // Sjekker om en brukeren er venn med en annen bruker
+    public boolean isFriendsWith(String friendsName) {
+        for (String friend : friends) {
+            if (friend.equals(friendsName)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+    // Sjekker om en bruker har et forhold til andre burkere
+    public boolean hasRelationWith(String user) {
+        for (String friend : friends) {
+            if (friend.equals(user)) {
+                return true;
+            }
+        }
+        for (String friend : pendingRequests) {
+            if (friend.equals(user)) {
+                return true;
+            }
+        }
+        for (String friend : friendRequests) {
+            if (friend.equals(user)) {
+                return true;
+            }
+        }
+        // TODO: Legge til blokerte brukere
+        // TODO: exception for å vite hvaslags forhold man har?
+        return false;
+    }
+
+
     public String getUID() {
         return UID;
     }
