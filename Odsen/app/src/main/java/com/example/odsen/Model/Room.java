@@ -6,17 +6,18 @@ import com.example.odsen.Tags.LogTags;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Room {
     private String name;
     private ArrayList<String> players;
-    private Date endDate;
+    private GregorianCalendar endDate;
     private int endNumberOfChallenges;
     private ArrayList<Challenge> challenges;
 
 
     // To konstruktører, en for når rom slutter på tid og en for antall utfordringer
-    public Room(String name, ArrayList<String> players, Date endDate, ArrayList<Challenge> challenges) {
+    public Room(String name, ArrayList<String> players, GregorianCalendar endDate, ArrayList<Challenge> challenges) {
         this.name = name;
         this.players = players;
         this.endDate = endDate;
@@ -37,7 +38,7 @@ public class Room {
     public ArrayList<String> getPlayers() {
         return players;
     }
-    public Date getEndDate() {
+    public GregorianCalendar getEndDate() {
         return endDate;
     }
     public int getEndNumberOfChallenges() {
@@ -58,7 +59,7 @@ public class Room {
         this.players = players;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(GregorianCalendar endDate) {
         this.endDate = endDate;
     }
 

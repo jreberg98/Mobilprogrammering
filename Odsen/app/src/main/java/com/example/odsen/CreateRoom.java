@@ -3,11 +3,13 @@ package com.example.odsen;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -26,7 +28,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class CreateRoom extends AppCompatActivity {
 
@@ -42,7 +46,7 @@ public class CreateRoom extends AppCompatActivity {
     private boolean winAfterTime = true;
     private ArrayList<String> friends = new ArrayList<>();
     private ArrayList<Challenge> challenges = new ArrayList<>();
-    private Date endDate;
+    private GregorianCalendar endDate;
     private int endChallenges;
 
     // UI element som oppdateres for brukeren
@@ -79,6 +83,8 @@ public class CreateRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 radioButtonClick(view);
+
+                promptDate();
             }
         });
         radioChallenge.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +207,27 @@ public class CreateRoom extends AppCompatActivity {
 
         this.finish();
     }
+
+    private void promptDate() {
+        DatePickerDialog datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month++; // Måneder er 0 indeksert
+
+                GregorianCalendar calendar = new GregorianCalendar();
+
+                calendar.set(year, month, day);
+
+                endDate = calendar;
+            }
+        },
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePicker.show();
+    }
+
 
     private void loadPlayer() {
         storage.collection(DBTags.USER)
