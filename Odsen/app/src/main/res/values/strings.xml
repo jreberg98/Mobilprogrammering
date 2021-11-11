@@ -26,7 +26,7 @@
     <string name="FRIENDS_title"><big>Venner</big></string>
     <string name="FRIENDS_add_friends_username_hint">Legg til venner via brukernavn</string>
     <string name="FRIENDS_add_friends_QR_code">Legg til venner via QR kode</string>
-    <string name="FRIENDS_new_friend_requests">Du nye venneforespørsler</string>
+    <string name="FRIENDS_new_friend_requests">Du har nye venneforespørsler</string>
 
 
     <!--  Alle tekstverdier for liste åpne rom  -->
