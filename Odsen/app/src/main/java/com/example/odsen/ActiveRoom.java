@@ -128,6 +128,8 @@ public class ActiveRoom extends AppCompatActivity {
             TextView textView = new TextView(getApplicationContext());
             textView.setText(challenge.getText());
             textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+            textView.setTextSize(15);
+            textView.setPadding(5,5,5,10);
 
             // Røde utfordringer er de som gjennstår
             // TODO: bruke andre custom farger
@@ -212,6 +214,9 @@ public class ActiveRoom extends AppCompatActivity {
             textView.setText(text);
             textView.setId(i);
             textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+            textView.setTextSize(20);
+
+            // TODO: Kan trykke på en bruker og få ei liste med hvem utfordringer som er fullført
 
             leaderboardHolder.addView(textView);
         }

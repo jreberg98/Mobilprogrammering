@@ -99,6 +99,8 @@ public class OpenRoomsList extends AppCompatActivity {
         textView.setText(roomName);
         textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
         textView.setTag(documentID);
+        textView.setTextSize(40);
+        textView.setPadding(0,10,0,10);
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override

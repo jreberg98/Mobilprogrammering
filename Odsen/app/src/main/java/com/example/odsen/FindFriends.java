@@ -101,6 +101,8 @@ public class FindFriends extends AppCompatActivity {
                 tempRequest.setId(outFriendRequests.size());
                 tempRequest.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tempRequest.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+                tempRequest.setTextSize(30);
+                tempRequest.setPadding(5,5,5,10);
 
                 friendRequest.addView(tempRequest);
 
@@ -177,6 +179,10 @@ public class FindFriends extends AppCompatActivity {
             textView.setId(i);
             textView.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
             textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+            // Litt lettere å trykke på
+            // Alle har pølsefingre i forhold til datamusa
+            textView.setTextSize(20);
+            textView.setPadding(5,5,5,10);
 
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
