@@ -24,8 +24,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import javax.security.auth.login.LoginException;
 
 public class FindFriends extends AppCompatActivity {
 
@@ -42,7 +45,8 @@ public class FindFriends extends AppCompatActivity {
     // TODO: oppdatere begge listene fra DB
     private ArrayList<String> incomingFriendRequests;
     private ArrayList<String> outFriendRequests = new ArrayList<>();
-    Player player;
+    private Player player;
+    private ArrayList<String> allUsers = new ArrayList<>();
 
     // Eksternt
     private FirebaseUser user;
@@ -57,6 +61,7 @@ public class FindFriends extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         loadPlayer();
+        loadAllUsers();
 
         usernameInput = findViewById(R.id.FRIENDS_add_with_user_name);
         qrCodePlaceholder = findViewById(R.id.FRIENDS_qr_code_placeholder);
@@ -74,6 +79,11 @@ public class FindFriends extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
                 String username = textView.getText().toString();
+
+                if (!allUsers.contains(username)) {
+                    usernameInput.setError("Brukeren finnes ikke");
+                    return false;
+                }
 
                 // TODO: sjekke om bruker finnes
                 if (player.hasRelationWith(username)) {
@@ -130,6 +140,25 @@ public class FindFriends extends AppCompatActivity {
                     loadNewFriendRequests();
                 } else {
                     Log.e(LogTags.LOADING_DATA, "FindFriends: loadPlayer " + task.getException());
+                }
+            }
+        });
+    }
+
+    private void loadAllUsers(){
+        // TODO: Er detta trygt? Egentlig ikke, vell -.-
+        storage.collection(DBTags.USER)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    Log.i(LogTags.LOADING_DATA, "FindFriends: loadAlllUsers: fant " + task.getResult().size() + " spillere totalt");
+                    for (DocumentSnapshot document : task.getResult()){
+                        allUsers.add(document.getId());
+                    }
+                } else {
+                    Log.e(LogTags.LOADING_DATA, "FindFriends: loadAllUsers: " + task.getException());
                 }
             }
         });
