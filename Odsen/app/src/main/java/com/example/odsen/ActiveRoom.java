@@ -84,7 +84,9 @@ public class ActiveRoom extends AppCompatActivity {
                         return false;
                     }
 
-                   addChallengeToDB(challenge);
+                    addChallengeToDB(challenge);
+                    room.getChallenges().add(new Challenge(challenge));
+                    updateUI();
                 }
                 return false;
             }
@@ -154,7 +156,7 @@ public class ActiveRoom extends AppCompatActivity {
             TextView textView = new TextView(getApplicationContext());
             textView.setText(challenge.getText());
             textView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
-            textView.setTextSize(15);
+            textView.setTextSize(20);
             textView.setPadding(5,5,5,10);
 
             // Røde utfordringer er de som gjennstår
