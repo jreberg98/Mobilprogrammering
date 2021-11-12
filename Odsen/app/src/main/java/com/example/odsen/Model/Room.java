@@ -82,6 +82,15 @@ public class Room {
         return challenges.get(index);
     }
 
+    public boolean hasChallenge(String challenge) {
+        for (Challenge temp : challenges){
+            if (temp.getText().equals(challenge)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     private int indexOfChallenge(String challengeText){
         for (int i = 0; i < challenges.size(); i++) {
             if (challenges.get(i).getText().equals(challengeText)){

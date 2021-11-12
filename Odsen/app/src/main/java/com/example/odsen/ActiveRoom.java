@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +38,7 @@ public class ActiveRoom extends AppCompatActivity {
     private LinearLayout challengesHolder;
     private LinearLayout leaderboardHolder;
     private Button endRoom;
+    private EditText addChallenge;
 
     // Data
     private Room room;
@@ -62,7 +65,30 @@ public class ActiveRoom extends AppCompatActivity {
         challengesHolder = findViewById(R.id.ACTIVE_ROOM_challenges_holder);
         leaderboardHolder = findViewById(R.id.ACTIVE_ROOM_leaderboard_holder);
         endRoom = findViewById(R.id.ACTIVE_ROOM_end_room);
+        addChallenge = findViewById(R.id.ACTIVE_ROOM_add_challenge);
 
+
+
+        addChallenge.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int key, KeyEvent keyEvent) {
+                if((keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    Log.i(LogTags.ANY_INPUT, "ActiveRoom: legger til challenge");
+
+                    String challenge = textView.getText().toString();
+
+                    Log.i("TAG", challenge);
+                    if (room.hasChallenge(challenge)){
+                        addChallenge.setError("hei, dust");
+                        Log.w(LogTags.ILLEGAL_INPUT, "ActiveRoom: " + room.getName() + " addChallenge: har allerede challenge " + challenge);
+                        return false;
+                    }
+
+                   addChallengeToDB(challenge);
+                }
+                return false;
+            }
+        });
 
         // TODO: Sjekke om spiller har laget rommet / har rettigheter til å avlsutte rommet
         endRoom.setOnClickListener(new View.OnClickListener() {
@@ -220,5 +246,16 @@ public class ActiveRoom extends AppCompatActivity {
 
             leaderboardHolder.addView(textView);
         }
+    }
+
+    private void addChallengeToDB(String challengeText) {
+        Log.i(LogTags.UPDATING_DB, "ActiveRoom: sender challenge til DB");
+
+        Challenge challenge = new Challenge();
+        challenge.setText(challengeText);
+
+        storage.collection(DBTags.ROOM)
+                .document(document)
+                .update(DBTags.ROOM_CHALLENGES, FieldValue.arrayUnion(challenge));
     }
 }

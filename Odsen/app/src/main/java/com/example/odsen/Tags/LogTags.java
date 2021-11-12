@@ -8,6 +8,7 @@ public class LogTags {
 
     // Database
     public static final String STARTING_DB = "Instans av DB";
+    public static final String UPDATING_DB = "Oppdaterer database";
 
     // Lasting av data
     public static final String USER_LOGGING = "Innlogging";
