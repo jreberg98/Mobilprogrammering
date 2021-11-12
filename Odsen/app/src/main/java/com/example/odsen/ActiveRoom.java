@@ -152,6 +152,7 @@ public class ActiveRoom extends AppCompatActivity {
 
         // Utfordringer
         challengesHolder.removeAllViewsInLayout();
+        room.sortChallenges();
         for (Challenge challenge : room.getChallenges()) {
             TextView textView = new TextView(getApplicationContext());
             textView.setText(challenge.getText());

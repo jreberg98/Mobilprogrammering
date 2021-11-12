@@ -5,6 +5,8 @@ import android.util.Log;
 import com.example.odsen.Tags.LogTags;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -100,5 +102,9 @@ public class Room {
         // Finner ikke elementet
         Log.e(LogTags.ILLEGAL_INPUT, "Room: IndexOfChallenge: challenge ikke i rommet");
         return -1;
+    }
+
+    public void sortChallenges() {
+        Collections.sort(challenges, Collections.reverseOrder());
     }
 }

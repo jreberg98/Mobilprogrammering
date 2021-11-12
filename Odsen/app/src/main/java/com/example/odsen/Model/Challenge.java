@@ -6,7 +6,7 @@ import com.example.odsen.Tags.LogTags;
 
 import java.util.Date;
 
-public class Challenge {
+public class Challenge implements Comparable<Challenge> {
     private String text;
     private String completedBy;
     private Date dateCompleted;
@@ -51,5 +51,22 @@ public class Challenge {
 
     public void setDateCompleted(Date dateCompleted) {
         this.dateCompleted = dateCompleted;
+    }
+
+    @Override
+    public int compareTo(Challenge challenge) {
+        if (this.getCompletedBy() == null) {
+            if (challenge.getCompletedBy() == null) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            if (challenge.getCompletedBy() == null) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
     }
 }
