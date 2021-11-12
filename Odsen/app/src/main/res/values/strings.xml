@@ -19,7 +19,7 @@
     <string name="CREATE_add_challenge_placeholder"><b>Legg til utfordringer her</b></string>
     <string name="CREATE_submit_room">Opprett rommet</string>
     <string name="CREATE_hint_add_win_condition">Velg hvordan rommet skal avsluttes</string>
-    <string name="CREATE_end_room_by_date">Rommet er åpent fram til %1$d, %2$d, %3$d</string>
+    <string name="CREATE_end_room_by_date">Rommet er åpent fram til %1$d. %2$d. %3$d</string>
     <string name="CREATE_end_room_by_challenges">Rommet er åpent fram til %d utfordringer er utført</string>
 
     <!--  Alle tekstverdier for Find Frineds  -->

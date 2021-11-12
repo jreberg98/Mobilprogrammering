@@ -10,21 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Odsen">
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".ActiveRoom"
             android:exported="true" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".OpenRoomsList"
             android:exported="true" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".FindFriends"
             android:exported="true" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".FinishedRooms"
             android:exported="true" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".CreateRoom"
             android:exported="true" />
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
