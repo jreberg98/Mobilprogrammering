@@ -19,6 +19,7 @@ public class Room {
     private Date endDate;
     private int endNumberOfChallenges;
     private ArrayList<Challenge> challenges;
+    private boolean completed = false;
 
 
     // To konstruktører, en for når rom slutter på tid og en for antall utfordringer
@@ -74,6 +75,14 @@ public class Room {
 
     public void setChallenges(ArrayList<Challenge> challenges) {
         this.challenges = challenges;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public Challenge complete(String challengeText, String user){
