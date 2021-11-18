@@ -113,7 +113,8 @@
             android:id="@+id/CREATE_challenge_holder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
 
 
         </LinearLayout>

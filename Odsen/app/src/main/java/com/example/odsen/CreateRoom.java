@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -173,6 +174,9 @@ public class CreateRoom extends AppCompatActivity {
 
                 tempChallengeView.setText(challenge);
                 tempChallengeView.setId(challenges.size());
+                tempChallengeView.setGravity(ViewGroup.TEXT_ALIGNMENT_GRAVITY);
+
+                challengeHolder.addView(tempChallengeView);
 
                 addChallenge.getText().clear();
 
