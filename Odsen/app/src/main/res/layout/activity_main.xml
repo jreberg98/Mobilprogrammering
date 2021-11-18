@@ -53,24 +53,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/MAIN_divider_horizontal" />
 
-    <Button
-        android:id="@+id/MAIN_find_friends"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:text="@string/MAIN_find_friends"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/MAIN_divider_vertical"
-        app:layout_constraintTop_toTopOf="@+id/MAIN_divider_horizontal" />
 
     <Button
         android:id="@+id/MAIN_create_room"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="12dp"
         android:text="@string/MAIN_create_rom"
-        app:layout_constraintBottom_toTopOf="@id/MAIN_logg_out"
-        app:layout_constraintEnd_toStartOf="@+id/MAIN_divider_vertical"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/MAIN_divider_vertical"
+        app:layout_constraintTop_toTopOf="@+id/MAIN_divider_horizontal" />
+
+    <Button
+        android:id="@+id/MAIN_find_friends"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/MAIN_find_friends"
+        app:layout_constraintEnd_toEndOf="@+id/MAIN_divider_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/MAIN_logg_out"/>
 
     <Button
         android:id="@+id/MAIN_finished_rooms"

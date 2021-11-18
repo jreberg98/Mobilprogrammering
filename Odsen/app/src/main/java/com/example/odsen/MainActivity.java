@@ -73,18 +73,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MAIN_find_friends = findViewById(R.id.MAIN_find_friends);
-        MAIN_find_friends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent findFriendsIntent = new Intent(view.getContext(), FindFriends.class);
-
-                Log.i(LogTags.NAVIGATION, "Going to 'FindFriends'");
-
-                startActivity(findFriendsIntent);
-            }
-        });
-
         MAIN_create_room = findViewById(R.id.MAIN_create_room);
         MAIN_create_room.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +82,18 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(LogTags.NAVIGATION, "Going to 'CreateRoom'");
 
                 startActivity(createRoomIntent);
+            }
+        });
+
+        MAIN_find_friends = findViewById(R.id.MAIN_find_friends);
+        MAIN_find_friends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent findFriendsIntent = new Intent(view.getContext(), FindFriends.class);
+
+                Log.i(LogTags.NAVIGATION, "Going to 'FindFriends'");
+
+                startActivity(findFriendsIntent);
             }
         });
 
