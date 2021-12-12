@@ -8,11 +8,8 @@
 
     <TextView
         android:id="@+id/OPEN_ROOMS_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="@string/OPEN_ROOMS_title_no_rooms"
-        android:textSize="40sp"
+       style="@style/PageTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
