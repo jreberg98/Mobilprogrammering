@@ -54,8 +54,6 @@ public class OpenRoomsList extends AppCompatActivity {
             Toast toast = Toast.makeText(this, "Kunne ikke holde deg innlogget :(", Toast.LENGTH_LONG);
         }
 
-        loadRooms(user.getEmail());
-
         titleView = findViewById(R.id.OPEN_ROOMS_title);
         roomHolder = findViewById(R.id.OPEN_ROOMS_room);
         filterByNumberOfUsers = findViewById(R.id.OPEN_ROOMS_filter_by_number_of_players);
@@ -63,7 +61,12 @@ public class OpenRoomsList extends AppCompatActivity {
         filterByRemainingChallenges = findViewById(R.id.OPEN_ROOMS_filter_remaining_challenges);
         }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        roomHolder.removeAllViews();
+        loadRooms(user.getEmail());
+    }
 
     private void loadRooms(String userID) {
 

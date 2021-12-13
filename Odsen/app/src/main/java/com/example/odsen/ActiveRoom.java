@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.odsen.Model.Challenge;
 import com.example.odsen.Model.Player;
@@ -161,6 +162,12 @@ public class ActiveRoom extends AppCompatActivity {
     }
 
     private void updateUI() {
+        // Går tilbake dersom rommet er avslutta
+        if (room.isCompleted()) {
+            Toast.makeText(getApplicationContext(), getString(R.string.ACTIVE_ROOM_TOAST_room_finished), Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
+
         // Tittel
         String titleText = getString(R.string.ACTIVE_ROOM_title, room.getName());
         title.setText(titleText);

@@ -41,6 +41,7 @@
     <string name="ACTIVE_ROOM_title">%s</string>
     <string name="ACTIVE_ROOM_close_room">Avslutt rommet</string>
     <string name="ACTIVE_ROOM_add_challenge">Legg til en utfordring</string>
+    <string name="ACTIVE_ROOM_TOAST_room_finished">Rommet har blitt avsluttet</string>
 
 
     <!--  Generelt  -->
