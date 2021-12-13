@@ -1,6 +1,7 @@
 package com.example.odsen;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
@@ -25,8 +26,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -136,13 +140,24 @@ public class ActiveRoom extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             room = task.getResult().toObject(Room.class);
-                            // TODO: Slett logtag, bare for debug
-                            Log.i(LogTags.LOADING_DATA, "ActiveRoom: lasta inn rom " + document);
+                            Log.i(LogTags.LOADING_DATA, "ActiveRoom: lasta inn rom " + room.getName());
 
                             updateUI();
                         }
                     }
                 });
+
+        storage.collection(DBTags.ROOM)
+                .document(document)
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                room = documentSnapshot.toObject(Room.class);
+                Log.i(LogTags.LOADING_DATA, "ActiveRoom: oppdatert data " + room.getName());
+
+                updateUI();
+            }
+        });
     }
 
     private void updateUI() {
