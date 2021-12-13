@@ -1,6 +1,7 @@
 package com.example.odsen;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -22,8 +23,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -80,6 +83,12 @@ public class FindFriends extends AppCompatActivity {
 
                 String username = textView.getText().toString();
 
+                if (username.equals("")) {
+                    return true;
+                }
+
+                EditText editText = (EditText) textView;
+
                 if (!allUsers.contains(username)) {
                     usernameInput.setError("Brukeren finnes ikke");
                     return false;
@@ -111,6 +120,8 @@ public class FindFriends extends AppCompatActivity {
                 Log.d(LogTags.ANY_INPUT, "FindFriends: Sendt vennefroespørsel til " + username);
 
                 addFriend(username);
+
+                editText.getText().clear();
 
                 return true;
             }
@@ -145,6 +156,16 @@ public class FindFriends extends AppCompatActivity {
                 }
             }
         });
+
+        storage.collection(DBTags.USER)
+                .document(user.getEmail())
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                player = documentSnapshot.toObject(Player.class);
+                loadNewFriendRequests();
+            }
+        });
     }
 
     private void loadAllUsers(){
@@ -167,8 +188,6 @@ public class FindFriends extends AppCompatActivity {
     }
 
     private void loadNewFriendRequests() {
-        // Tømet lista, kan dermed brukes flere ganger
-        // TODO: erstatte med recycleView ?
         friendList.removeAllViewsInLayout();
 
         for (int i = 0; i < player.getFriendRequests().size(); i++){
