@@ -65,6 +65,7 @@ public class OpenRoomsList extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         roomHolder.removeAllViews();
+        rooms.clear();
         loadRooms(user.getEmail());
     }
 
