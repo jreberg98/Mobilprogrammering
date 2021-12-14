@@ -11,6 +11,7 @@
 8. [Brukervurderinger](#tilbakemeldinger)
 9. [Gjennomføring og problemer](#utfordringer)
 10. [Totalvurdering](#totalvurdering)
+<div style="page-break-after: always;"></div>
 
 ## Intro
 ### Beskrivelse
@@ -20,6 +21,7 @@ Denne appen er ment for å grupper av folk. Det vil fungere som et spill man spi
 Tanken med appen er at den kan brukes i en vennegruppe, for eksempel på fest eller "bli kjent" leiker. Det er derfor viktig med en app som er lett å bruke, og enkel å komme i gang med.
 
 Appen er tenkt for å lett holde oversikt over hvem som har gjort hva. Det er i utgangspunktet lite funksjonalitet i appen, ettersom bruken av den bare er en oversikt som oppdateres.
+<div style="page-break-after: always;"></div>
 
 ## Plan før start
 ### Set mode
@@ -32,6 +34,7 @@ Her blir alle utfrodringene tilgjengelig for alle, og det er førsteman til møl
 For å få en utfordring godkjent kan man enten velge om man stoler på hverandre, altså at man ikke har noen form for validering. Dette passer best for utfordringer som påvirker noen i gruppa, så noen på den måten ser det.
 
 Alternativt kan man ha en intern validering. Da kan man for eksempel tar bilde av at man har fullført en utfordring, eller en annen kan være med og se på utfordringen bli fullført. For eksempel å skrive noe med tusj i ansiktet og gå på butikken kan man ta bilde av, mens å løpe naken over en bruk kan man få noen med på å se på.
+<div style="page-break-after: always;"></div>
 
 ## Endringer fra utgangspunktet
 Istedenfor å velge mellom "set" og "loose" blir alle utfordringer i et rom tilgjengelig for alle spillere. I tillegg er det heller ikke mulighet til å velge en vanskelighetsgrad på utfordringer. Det gjør at det er mindre å trykke på i appen, som gjør det lettere å komme igang, samt at alle som spiller har like forutsetninger for å spille.
@@ -41,6 +44,7 @@ Det er i tillegg heller ikke validering av utfordringer med i sluttappen. Grunne
 I tillegg hadde det blitt noe man måtte brukt tid på når man bruker appen, som tar fokuset bort fra spillet. For denne appen er litt av poenget å bruke så lite tid som mulig på appen, ettersom appen i seg selv bare "støtter" en annen "lek".
 
 
+<div style="page-break-after: always;"></div>
 
 ## Brukerveiledning
 1. Logg inn eller registrer deg når appen åpnes første gang
@@ -54,6 +58,7 @@ I tillegg hadde det blitt noe man måtte brukt tid på når man bruker appen, so
 7. Gjør utfordringer, og marker dem som fullført
    * Legg eventuelt til flere utfordringer dersom det starter å gå tomt
    * Avslutt rommet når dere er lei eller det ikke er flere utfordringer
+<div style="page-break-after: always;"></div>
 
 ## Design
 De fleste bruker mobiler i portrett modus fremfor landskapsmodus, spessielt når man ikke bruker den lenge. 
@@ -86,6 +91,7 @@ For alle tidligere fullførte rom er tanken at man skal kunne se hvor bra eller 
 
 ### Lyd og bilder
 For at appen skal fungere vil det ikke være behov for noen bilder eller lyder. Det kan derimot være med på å gjøre appen mer brukervennlig ved at den skiller seg ut. For eksempel vil det være lettere å finne appen med et eget ikon blant alle andre apper. I tillegg vil en egen lyd gjøre det lettere å kjenne igjen varsler ved at de skiller seg ut fra andre varsler.
+<div style="page-break-after: always;"></div>
 
 ## Krav
 For at appen skal kunne brukes så er det visse ting som må fungere, mens andre ting er mindre viktig. Siden ikke alle krav er like viktige er det derfor noen ting man må prioritere mer en andre. Derfor lager jeg 3 lister med krav ettersom hvor viktige de er.
@@ -127,6 +133,7 @@ I tillegg er det enkelte krav som ikke har noe med selve appen å gjøre. Disse 
   * Google Authentication
 * Mørkt tema for brukervennlighet
 * Universell utforming
+<div style="page-break-after: always;"></div>
 
 ## Systemdesign
 
@@ -152,6 +159,7 @@ Hver skjerm trenger sin egen klasse for å tilby funksjonalitet til skjermene. I
 Det var også tenkt å ha en egen klasse for alt som har med database å gjøre. Det var igjen for å samle logikk, og for å gjøre det lettere å bytte til en annen database. Databaselogikken ble likevell spredd rundt i de ulike klassene der det ble brukt, ettersom det gir noe mer funksjonalitet.
 
 Utover dette er det 2 klasser til, DBTags og LogTags. Dette er klasser med konstanter som brukes for å unngå skrivefeil og for å holde orden på hva de ulike taggene som brukes er.
+<div style="page-break-after: always;"></div>
 
 ## Tilbakemeldinger
 Her er tilbakemeldinger fra brukere av appen samlet. Ettersom appen ikke har vært ferdigutviklet har det dermed vært noe funksjonalitet som ikke har vært med, og dermed ikke blitt sett på.
@@ -189,6 +197,7 @@ Var på en helgetur til Oslo med 2 venner, så vi var altså 3 som brukte appen.
      * Tar veldig kort tid å kunne starte å spille, så det er en lav terskel for å prøve appen
    * Gøy for små "events"
      * Passer til små grupper, og for et kort tidsrom. Eksepelvis "bli kjent" leiker og utdrikkningslag
+<div style="page-break-after: always;"></div>
 
 ## Gjennomføring
 ### Ting som gikk bra
@@ -221,8 +230,19 @@ I tillegg burde jeg heller ha brukt noe mer tilpasset for lister enn LinearLayou
 
 #### Prosess
 Under utviklingen har de fleste oppgave blitt gjort. De har på den måten fungert som prototyper for prosjektet. I tillegg har de fleste deler av appen blitt gjort så små som mulig, og dermed har det vært lite behov for ytterligere prototyping.
+<div style="page-break-after: always;"></div>
 
 ## Totalvurdering
+
+
 Totalt for appen føler jeg at tanken var ganske bra, men at gjennomføringen kunne ha vært bedre. Det ser man også på dokumentasjonen, ettersom dokumentasjonen har fokus på de sammen tingene for appen hele veien, og ikke tar opp nye funksjoner underveis.
 
 I motsettning til dokumentasjonen føler jeg selv at appen ikke har blitt like bra. Mye av dette er fordi appen har forholdsvis lite funksjonalitet, og likevell ikke blitt ferdig. Likevell føler jeg at det som har blitt gjort i appen er gjort på en grei måte, så det som er gjort føler jeg er gjort bra.
+
+
+## Linker
+[Dokumentasjon på GitHub](https://github.com/jreberg98/Mobilprogrammering/tree/main/dokumentasjon)
+
+[Appen på GitHub](https://github.com/jreberg98/Mobilprogrammering/tree/main/Odsen)
+
+[Alt for faget](https://github.com/jreberg98/Mobilprogrammering/)
